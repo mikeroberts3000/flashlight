@@ -1,8 +1,7 @@
 from pylab import *
 
 import scipy.linalg
-import cvxopt
-import sklearn.metrics
+# import cvxopt
 
 
 
