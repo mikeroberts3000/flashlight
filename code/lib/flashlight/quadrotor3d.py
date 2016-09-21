@@ -11,10 +11,11 @@ import sympy.matrices
 import sympy.physics
 import sympy.physics.mechanics
 import sympy.physics.mechanics.functions
-import pathutils
-import trigutils
-import gradientutils
-import sympyutils
+
+import gradient
+import path
+import sympy
+import trig
 
 
 

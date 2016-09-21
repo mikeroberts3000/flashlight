@@ -1,15 +1,10 @@
 from pylab import *
 
-import sklearn
 import sklearn.preprocessing
-
-
 
 def cross_product_left_term_matrix_from_vector(a):
     
     return matrix([[0,-a[2],a[1]],[a[2],0,-a[0]],[-a[1],a[0],0]])
-
-
 
 def project_vectors_onto_vectors(a,b,axis=1):
 

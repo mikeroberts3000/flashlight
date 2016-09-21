@@ -12,10 +12,12 @@ import sympy.matrices
 import sympy.physics
 import sympy.physics.mechanics
 import sympy.physics.mechanics.functions
-import trigutils
-import pathutils
-import sympyutils
-import gradientutils
+
+import gradient
+import path
+import trig
+import sympy
+
 
 
 front_prop_and_quad_positive_x_axis_angle = pi/4

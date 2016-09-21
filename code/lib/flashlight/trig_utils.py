@@ -1,14 +1,10 @@
 from pylab import *
 
-
-
 def compute_smallest_angular_diff(a,b):
 
-    #
     # analytically, this dot product will always be in the range [-1.0,1.0],
     # but we clip to account for small numerical errors in the dot product
     # function when a and b are almost identical
-    #
     omega = arccos( clip( dot([sin(a),cos(a)],[sin(b),cos(b)]), -1.0, 1.0 ) )
 
     if fmod(b,2*pi) > fmod(a,2*pi):
@@ -21,8 +17,6 @@ def compute_smallest_angular_diff(a,b):
             return -omega
         else:
             return omega
-
-
 
 def compute_continuous_angle_array(a,on_half_circle=False):
 

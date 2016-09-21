@@ -1,1 +1,1 @@
-print "Initializing Flashlight v0.0.1"
+print "Initializing flashlight v0.0.1"

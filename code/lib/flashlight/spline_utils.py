@@ -1,22 +1,11 @@
 from pylab import *
 
-import scipy.linalg
 # import cvxopt
+import scipy.linalg
 
 
 
 def compute_catmull_rom_spline_coefficients(P,T=None,S=None,Z=None,degree=3):
-
-    """
-
-Computes Catmull Rom spline coefficients for the knot sequences in T, the
-points in P. S is a list of straight line segments, Z is a list of keyframes
-for which the derivative must be zero, and degree must be in the set [3,5,7,9].
-
-Returns C an array of coefficients for each segment, T an array of knot
-sequences, and sd a spline description object.
-
-    """
 
     P = P.astype(float64)
 
@@ -119,16 +108,6 @@ def compute_trigonometric_spline_coefficients(P,T=None,S=None,Z=None,order=2):
 
 
 def evaluate_catmull_rom_spline(C,T,sd,T_eval=None,num_samples=None):
-
-    """
-
-Evaluates Catmull Rom spline at the parameter values stored in T_eval
-using the coefficients stored in C and the knot values stored in T.
-
-Returns the positions of the spline evaluated at each parameter value.
-
-    """
-
     return _evaluate_spline(C,T,sd,_evaluate_polynomial_spline_scalar,T_eval,num_samples)
 
 
@@ -513,8 +492,6 @@ def _compute_minimum_variation_catmull_rom_spline_coefficients_scalar(t_keyframe
         A,b = _compute_minimum_variation_catmull_rom_spline_linear_system_degree_11(t,p,pd1,pd2,pd3,pd4,sd)
         P,q = _compute_minimum_variation_catmull_rom_spline_quadratic_objective_degree_11(sd)
 
-    # print "flashlight.splineutils: Solving QP with cvxopt.solvers.qp..."
-
     # A_cvx  = cvxopt.matrix(A)
     # b_cvx  = cvxopt.matrix(b)
     # P2_cvx = cvxopt.matrix(2*P)
@@ -523,16 +500,12 @@ def _compute_minimum_variation_catmull_rom_spline_coefficients_scalar(t_keyframe
     # c_sol_cvx = cvxopt.solvers.qp(P2_cvx, q_cvx, A=A_cvx, b=b_cvx)
     # c_cvx     = array(c_sol_cvx["x"]).squeeze()
 
-    # print "flashlight.splineutils: Solving QP with numpy.linalg.solve..."
-
     Alpha = bmat([[ 2*P, A.T ],[ A, zeros((A.shape[0],A.shape[0])) ]])
     beta  = bmat([[ zeros((P.shape[0],1)) ],[ b ]])
     chi   = linalg.solve(Alpha,beta)
     c     = chi[0:P.shape[0]].A1
     
     # assert allclose(c,c_cvx)
-
-    # print "flashlight.splineutils: Both solutions are equal."
 
     return c
 
@@ -609,8 +582,6 @@ def _compute_minimum_variation_nonlocal_interpolating_b_spline_coefficients_scal
         P = scipy.linalg.block_diag(P,Z)
         q = bmat([[q],[z]])
 
-    # print "flashlight.splineutils: Solving QP with cvxopt.solvers.qp..."
-
     # A_cvx  = cvxopt.matrix(A)
     # b_cvx  = cvxopt.matrix(b)
     # P2_cvx = cvxopt.matrix(2*P)
@@ -619,16 +590,12 @@ def _compute_minimum_variation_nonlocal_interpolating_b_spline_coefficients_scal
     # c_sol_cvx = cvxopt.solvers.qp(P2_cvx, q_cvx, A=A_cvx, b=b_cvx)
     # c_cvx     = array(c_sol_cvx["x"]).squeeze()
 
-    # print "flashlight.splineutils: Solving QP with numpy.linalg.solve..."
-
     Alpha = bmat([[ 2*P, A.T ],[ A, zeros((A.shape[0],A.shape[0])) ]])
     beta  = bmat([[ zeros((P.shape[0],1)) ],[ b ]])
     chi   = linalg.solve(Alpha,beta)
     c     = chi[0:P.shape[0]].A1
 
     # assert allclose(c,c_cvx)
-
-    # print "flashlight.splineutils: Both solutions are equal."
 
     return c
 

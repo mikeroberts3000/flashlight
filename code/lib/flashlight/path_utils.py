@@ -1,4 +1,8 @@
-import os, sys, inspect
+from pylab import *
+
+import inspect
+import os
+import sys
 
 def add_relative_to_current_source_file_path_to_sys_path(relpath):
     path = os.path.realpath(os.path.abspath(os.path.join(os.path.split(inspect.getfile(inspect.currentframe()))[0],relpath)))
