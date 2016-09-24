@@ -2,8 +2,6 @@ from pylab import *
 
 import matplotlib.animation
 import scipy.interpolate
-import scipy.integrate
-import sklearn
 import sklearn.preprocessing
 import sympy
 import sympy.matrices
@@ -37,7 +35,7 @@ num_dt_dims = 1
 num_dims_g_dynamics_ti = num_x_dims
 
 build_sympy_modules_on_import = False
-# build_sympy_modules_on_import = True
+# build_sympy_modules_on_import = False
 
 const_vals = hstack( [ d, m, I, f_external_world.A1 ] )
 
@@ -83,9 +81,9 @@ print "flashlight.quadrotor_2d: Finished constructing sympy symbols (%.03f secon
 
 
 
-def compute_manipulator_matrices_symbolic(x_expr,t_expr):
+def construct_manipulator_matrix_expressions(x_expr,t_expr):
 
-    print "flashlight.quadrotor_2d: Computing manipulator matrices in symbolic form..."
+    print "flashlight.quadrotor_2d: Constructing manipulator matrix expressions..."
 
     theta_expr = x_expr[2,0]
 
@@ -110,7 +108,7 @@ def compute_manipulator_matrices_symbolic(x_expr,t_expr):
     G_expr = sympy_utils.construct_matrix_from_block_matrix( sympy.Matrix( [ [G_0_expr],             [G_1_expr] ] ) )
     B_expr = sympy_utils.construct_matrix_from_block_matrix( sympy.Matrix( [ [B_0_expr],             [B_1_expr] ] ) )
 
-    print "flashlight.quadrotor_2d: Finished computing manipulator matrices in symbolic form..."
+    print "flashlight.quadrotor_2d: Finished constructing manipulator matrix expressions..."
 
     return H_expr,C_expr,G_expr,B_expr
 
@@ -122,7 +120,7 @@ def build_sympy_modules():
     sys_time_begin = time.time()
 
     # manipulator matrices
-    H_expr,C_expr,G_expr,B_expr = compute_manipulator_matrices_symbolic(x_expr,t_expr)
+    H_expr,C_expr,G_expr,B_expr = construct_manipulator_matrix_expressions(x_expr,t_expr)
 
     # expressions to solve for df_dx and df_du
     q_dot_dot_expr = H_expr.inv()*(B_expr*u_expr - (C_expr*q_dot_expr + G_expr))
@@ -189,10 +187,10 @@ df_du_autowrap = sympy_utils.import_anon_func_from_from_module_autowrap( module_
 # dgdynamicsti_ducurrent_autowrap  = sympy_utils.import_anon_func_from_from_module_autowrap( module_name="quadrotor2d_dgdynamicsti_ducurrent",  path=current_source_file_path+"/data/quadrotor2d" )
 # dgdynamicsti_ddtcurrent_autowrap = sympy_utils.import_anon_func_from_from_module_autowrap( module_name="quadrotor2d_dgdynamicsti_ddtcurrent", path=current_source_file_path+"/data/quadrotor2d" )
 
-# H_vectorized_autowrap = sympy_utils.import_anon_func_from_from_module_autowrap( module_name="quadrotor2d_H_vectorized", path=current_source_file_path+"/data/quadrotor2d" )
-# C_vectorized_autowrap = sympy_utils.import_anon_func_from_from_module_autowrap( module_name="quadrotor2d_C_vectorized", path=current_source_file_path+"/data/quadrotor2d" )
-# G_vectorized_autowrap = sympy_utils.import_anon_func_from_from_module_autowrap( module_name="quadrotor2d_G_vectorized", path=current_source_file_path+"/data/quadrotor2d" )
-# B_vectorized_autowrap = sympy_utils.import_anon_func_from_from_module_autowrap( module_name="quadrotor2d_B_vectorized", path=current_source_file_path+"/data/quadrotor2d" )
+H_vectorized_autowrap = sympy_utils.import_anon_func_from_from_module_autowrap( module_name="quadrotor_2d_H_vectorized", path=current_source_file_path+"/data/quadrotor_2d" )
+C_vectorized_autowrap = sympy_utils.import_anon_func_from_from_module_autowrap( module_name="quadrotor_2d_C_vectorized", path=current_source_file_path+"/data/quadrotor_2d" )
+G_vectorized_autowrap = sympy_utils.import_anon_func_from_from_module_autowrap( module_name="quadrotor_2d_G_vectorized", path=current_source_file_path+"/data/quadrotor_2d" )
+B_vectorized_autowrap = sympy_utils.import_anon_func_from_from_module_autowrap( module_name="quadrotor_2d_B_vectorized", path=current_source_file_path+"/data/quadrotor_2d" )
 
 # x_dot_vectorized_autowrap = sympy_utils.import_anon_func_from_from_module_autowrap( module_name="quadrotor2d_x_dot_vectorized", path=current_source_file_path+"/data/quadrotor2d" )
 # df_dx_vectorized_autowrap = sympy_utils.import_anon_func_from_from_module_autowrap( module_name="quadrotor2d_df_dx_vectorized", path=current_source_file_path+"/data/quadrotor2d" )
@@ -211,10 +209,11 @@ print "flashlight.quadrotor_2d: Finished loading sympy modules (%.03f seconds)."
 
 def pack_state(p, theta, p_dot, theta_dot):
 
-    x = matrix( [ p.item(0), p.item(1), theta, p_dot.item(0), p_dot.item(1), theta_dot ] ).T
+    x     = matrix( [ p.item(0), p.item(1), theta, p_dot.item(0), p_dot.item(1), theta_dot ] ).T
+    q     = matrix( [ p.item(0), p.item(1), theta ] ).T
+    q_dot = matrix( [ p_dot.item(0), p_dot.item(1), theta_dot ] ).T
 
-    return x
-
+    return x, q, q_dot
 
 def unpack_state(x):
 
@@ -227,17 +226,13 @@ def unpack_state(x):
 
     return p, theta, p_dot, theta_dot, q, q_dot
 
+def pack_state_space_trajectory(p, theta, p_dot, theta_dot):
 
+    x     = c_[ p, theta, p_dot, theta_dot ]
+    q     = c_[ p, theta ]
+    q_dot = c_[ p_dot, theta_dot ]
 
-def pack_state_space_trajectory_and_derivatives(q_qdot_qdotdot):
-
-    p, p_dot, p_dot_dot, theta, theta_dot, theta_dot_dot = q_qdot_qdotdot
-
-    x = c_[ p, theta, p_dot, theta_dot ]
-
-    return x
-
-
+    return x, q, q_dot, q_dot_dot
 
 def unpack_state_space_trajectory(x):
 
@@ -249,6 +244,17 @@ def unpack_state_space_trajectory(x):
     q_dot     = x[:,3:6]
 
     return p, theta, p_dot, theta_dot, q, q_dot
+
+def pack_state_space_trajectory_and_derivatives(q_qdot_qdotdot):
+
+    p, p_dot, p_dot_dot, theta, theta_dot, theta_dot_dot = q_qdot_qdotdot
+
+    x         = c_[ p, theta, p_dot, theta_dot ]
+    q         = c_[ p, theta ]
+    q_dot     = c_[ p_dot, theta_dot ]
+    q_dot_dot = c_[ p_dot_dot, theta_dot_dot ]
+
+    return x, q, q_dot, q_dot_dot
 
 
 
@@ -446,21 +452,18 @@ def compute_state_space_trajectory_and_derivatives(p,dt):
 
 def compute_control_trajectory(q_qdot_qdotdot):
 
-    p, p_dot, p_dot_dot, theta, theta_dot, theta_dot_dot = q_qdot_qdotdot
-
-    num_timesteps = p.shape[0]
-
-    u = zeros((num_timesteps,num_u_dims))
+    x, q, q_dot, q_dot_dot = pack_state_space_trajectory_and_derivatives(q_qdot_qdotdot)
+    num_timesteps          = q.shape[0]
+    u                      = zeros((num_timesteps,num_u_dims))
 
     for ti in arange(num_timesteps):
 
-        q_ti         = matrix( [ p[ti,0],         p[ti,1],         theta[ti]         ] ).T
-        q_dot_ti     = matrix( [ p_dot[ti,0],     p_dot[ti,1],     theta_dot[ti]     ] ).T
-        q_dot_dot_ti = matrix( [ p_dot_dot[ti,0], p_dot_dot[ti,1], theta_dot_dot[ti] ] ).T
-        x_ti         = bmat( [[q_ti], [q_dot_ti]] )
-
-        H, C, G, B = compute_manipulator_matrices(x_ti)
-        u_ti       = linalg.pinv(B)*(H*q_dot_dot_ti + C*q_dot_ti + G)
+        q_ti         = matrix( q[ti] ).T
+        q_dot_ti     = matrix( q_dot[ti] ).T
+        q_dot_dot_ti = matrix( q_dot_dot[ti] ).T
+        x_ti         = matrix( x[ti] ).T
+        H, C, G, B   = compute_manipulator_matrices(x_ti)
+        u_ti         = linalg.pinv(B)*(H*q_dot_dot_ti + C*q_dot_ti + G)
 
         assert allclose(B*u_ti, H*q_dot_dot_ti + C*q_dot_ti + G)
 
@@ -470,10 +473,7 @@ def compute_control_trajectory(q_qdot_qdotdot):
 
 
 
-def draw(t, x, t_nominal=None, x_nominal=None, return_anim_func=False):
-
-    if not return_anim_func:
-        plt.switch_backend("Qt4Agg")
+def draw(t, x, t_nominal=None, x_nominal=None, inline=False):
 
     if t_nominal is not None:
         assert x_nominal is not None
@@ -508,13 +508,16 @@ def draw(t, x, t_nominal=None, x_nominal=None, return_anim_func=False):
     p_y_pad = 0.1*(p_y_max - p_y_min)
     p_x_pad = 0.1*(p_x_max - p_x_min)
 
+    if not inline:
+        plt.switch_backend("Qt4Agg")
+
     fig = figure()
     ax  = fig.add_subplot(111, autoscale_on=False, xlim=(p_x_min-p_x_pad, p_x_max+p_x_pad), ylim=(p_y_min-p_y_pad, p_y_max+p_y_pad))
 
     ax.set_aspect("equal")
     ax.grid()
 
-    if return_anim_func:
+    if inline:
         plt.close()
 
     if t_nominal is not None and x_nominal is not None:
@@ -569,7 +572,7 @@ def draw(t, x, t_nominal=None, x_nominal=None, return_anim_func=False):
     animation = matplotlib.animation.FuncAnimation(fig, animate, arange(x.shape[0]), interval=25, blit=True, init_func=init)
     #animation.save("quadcopter_2d_open_loop_trajectory_no_disturbance.mp4", fps=30)
 
-    if return_anim_func:
+    if inline:
         return animation
     else:
         plt.show()
