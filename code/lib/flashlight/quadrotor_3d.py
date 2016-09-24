@@ -1,6 +1,5 @@
 from pylab import *
 
-import cv2
 import matplotlib.cm
 import os
 import sklearn.preprocessing
@@ -850,8 +849,9 @@ def draw(t, x, t_nominal=None, x_nominal=None, tmp_dir="tmp", request_delete_tmp
 
     def render_video():
 
-        img_0 = cv2.imread(tmp_dir+"/"+"0000.png")
+        import cv2
 
+        img_0        = cv2.imread(tmp_dir+"/"+"0000.png")
         video_writer = cv2.VideoWriter(tmp_dir+"/"+"tmp.mp4", fromstring("avc1", dtype=int8).view(int32), fps=25.0, frameSize=(img_0.shape[1],img_0.shape[0]))
         for ti in range(x.shape[0]):
             img = cv2.imread(tmp_dir+"/"+"%04d.png" % ti)
