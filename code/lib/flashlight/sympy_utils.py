@@ -4,10 +4,6 @@ import os
 import re
 import subprocess
 import sympy
-import sympy.matrices
-import sympy.physics
-import sympy.physics.mechanics
-import sympy.physics.mechanics.functions
 import sympy.utilities.autowrap
 # import sympy.printing.theanocode
 # import theano.compile.function_module

@@ -4,10 +4,6 @@ import matplotlib.animation
 import scipy.interpolate
 import sklearn.preprocessing
 import sympy
-import sympy.matrices
-import sympy.physics
-import sympy.physics.mechanics
-import sympy.physics.mechanics.functions
 import time
 import transformations
 
@@ -65,16 +61,16 @@ x_expr                 = sympy_utils.construct_matrix_from_block_matrix( sympy.M
 u_expr, u_expr_entries = sympy_utils.construct_matrix_and_entries("u",(num_u_dims,1), real=True)
 
 # symbols to solve for g_dynamics, given x_current x_next u_current
-x_current_expr, x_current_expr_entries = sympy_utils.construct_matrix_and_entries("x_current", (num_x_dims,1), real=True)
-x_next_expr,    x_next_expr_entries    = sympy_utils.construct_matrix_and_entries("x_next",    (num_x_dims,1), real=True)
-u_current_expr, u_current_expr_entries = sympy_utils.construct_matrix_and_entries("u_current", (num_u_dims,1), real=True)
-dt_current_expr                        = sympy.Symbol("delta_t_current", real=True)
+# x_current_expr, x_current_expr_entries = sympy_utils.construct_matrix_and_entries("x_current", (num_x_dims,1), real=True)
+# x_next_expr,    x_next_expr_entries    = sympy_utils.construct_matrix_and_entries("x_next",    (num_x_dims,1), real=True)
+# u_current_expr, u_current_expr_entries = sympy_utils.construct_matrix_and_entries("u_current", (num_u_dims,1), real=True)
+# dt_current_expr                        = sympy.Symbol("delta_t_current", real=True)
 
 # symbol collections
 const_syms                                                   = hstack( [ d_expr, m_expr, I_expr, matrix(f_external_expr).A1 ] )
 const_and_x_syms                                             = hstack( [ const_syms, matrix(x_expr).A1 ] )
 const_and_x_and_u_syms                                       = hstack( [ const_syms, matrix(x_expr).A1, matrix(u_expr).A1 ] )
-const_and_xcurrent_and_xnext_and_ucurrent_and_dtcurrent_syms = hstack( [ const_syms, matrix(x_current_expr).A1, matrix(x_next_expr).A1, matrix(u_current_expr).A1, dt_current_expr ] )
+# const_and_xcurrent_and_xnext_and_ucurrent_and_dtcurrent_syms = hstack( [ const_syms, matrix(x_current_expr).A1, matrix(x_next_expr).A1, matrix(u_current_expr).A1, dt_current_expr ] )
 
 sys_time_end = time.time()
 print "flashlight.quadrotor_2d: Finished constructing sympy symbols (%.03f seconds)." % (sys_time_end - sys_time_begin)
@@ -108,7 +104,7 @@ def construct_manipulator_matrix_expressions(x_expr,t_expr):
     G_expr = sympy_utils.construct_matrix_from_block_matrix( sympy.Matrix( [ [G_0_expr],             [G_1_expr] ] ) )
     B_expr = sympy_utils.construct_matrix_from_block_matrix( sympy.Matrix( [ [B_0_expr],             [B_1_expr] ] ) )
 
-    print "flashlight.quadrotor_2d: Finished constructing manipulator matrix expressions..."
+    print "flashlight.quadrotor_2d: Finished constructing manipulator matrix expressions."
 
     return H_expr,C_expr,G_expr,B_expr
 
@@ -120,7 +116,7 @@ def build_sympy_modules():
     sys_time_begin = time.time()
 
     # manipulator matrices
-    H_expr,C_expr,G_expr,B_expr = construct_manipulator_matrix_expressions(x_expr,t_expr)
+    H_expr,C_expr,G_expr,B_expr = construct_manipulator_matrix_expressions()
 
     # expressions to solve for df_dx and df_du
     q_dot_dot_expr = H_expr.inv()*(B_expr*u_expr - (C_expr*q_dot_expr + G_expr))
@@ -209,9 +205,9 @@ print "flashlight.quadrotor_2d: Finished loading sympy modules (%.03f seconds)."
 
 def pack_state(p, theta, p_dot, theta_dot):
 
-    x     = matrix( [ p.item(0), p.item(1), theta, p_dot.item(0), p_dot.item(1), theta_dot ] ).T
-    q     = matrix( [ p.item(0), p.item(1), theta ] ).T
+    q     = matrix( [ p.item(0),     p.item(1),     theta ] ).T
     q_dot = matrix( [ p_dot.item(0), p_dot.item(1), theta_dot ] ).T
+    x     = matrix( r_[ q.A1, q_dot.A1 ] ).T
 
     return x, q, q_dot
 
@@ -228,11 +224,11 @@ def unpack_state(x):
 
 def pack_state_space_trajectory(p, theta, p_dot, theta_dot):
 
-    x     = c_[ p, theta, p_dot, theta_dot ]
-    q     = c_[ p, theta ]
+    q     = c_[ p,     theta ]
     q_dot = c_[ p_dot, theta_dot ]
+    x     = c_[ q, q_dot ]
 
-    return x, q, q_dot, q_dot_dot
+    return x, q, q_dot
 
 def unpack_state_space_trajectory(x):
 
@@ -249,10 +245,10 @@ def pack_state_space_trajectory_and_derivatives(q_qdot_qdotdot):
 
     p, p_dot, p_dot_dot, theta, theta_dot, theta_dot_dot = q_qdot_qdotdot
 
-    x         = c_[ p, theta, p_dot, theta_dot ]
-    q         = c_[ p, theta ]
-    q_dot     = c_[ p_dot, theta_dot ]
+    q         = c_[ p,         theta ]
+    q_dot     = c_[ p_dot,     theta_dot ]
     q_dot_dot = c_[ p_dot_dot, theta_dot_dot ]
+    x         = c_[ q, q_dot ]
 
     return x, q, q_dot, q_dot_dot
 

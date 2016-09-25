@@ -5,19 +5,14 @@ import os
 import sklearn.preprocessing
 import subprocess
 import sympy
-import sympy.matrices
-import sympy.physics
-import sympy.physics.mechanics
-import sympy.physics.mechanics.functions
 import time
 import transformations
 
 import gradient_utils
-import interpolate_utils
+import ipython_display_utils
 import path_utils
 import sympy_utils
 import trig_utils
-import ipython_display_utils
 
 
 
@@ -63,7 +58,7 @@ I_expr, I_expr_entries                   = sympy_utils.construct_matrix_and_entr
 f_external_expr, f_external_expr_entries = sympy_utils.construct_matrix_and_entries("f_e",(3,1), real=True)
 
 # variables
-t_expr  = sympy.Symbol("t", real=True)
+t_expr = sympy.Symbol("t", real=True)
 
 p_z_expr   = sympy.Symbol("p_z",   real=True)(t_expr)
 p_y_expr   = sympy.Symbol("p_y",   real=True)(t_expr)
@@ -79,16 +74,16 @@ x_expr                 = sympy_utils.construct_matrix_from_block_matrix( sympy.M
 u_expr, u_expr_entries = sympy_utils.construct_matrix_and_entries("u",(num_u_dims,1))
 
 # symbols to solve for g_dynamics, given x_current x_next u_current
-x_current_expr, x_current_expr_entries = sympy_utils.construct_matrix_and_entries("x_current", (num_x_dims,1), real=True)
-x_next_expr,    x_next_expr_entries    = sympy_utils.construct_matrix_and_entries("x_next",    (num_x_dims,1), real=True)
-u_current_expr, u_current_expr_entries = sympy_utils.construct_matrix_and_entries("u_current", (num_u_dims,1), real=True)
-dt_current_expr                        = sympy.Symbol("delta_t_current", real=True)
+# x_current_expr, x_current_expr_entries = sympy_utils.construct_matrix_and_entries("x_current", (num_x_dims,1), real=True)
+# x_next_expr,    x_next_expr_entries    = sympy_utils.construct_matrix_and_entries("x_next",    (num_x_dims,1), real=True)
+# u_current_expr, u_current_expr_entries = sympy_utils.construct_matrix_and_entries("u_current", (num_u_dims,1), real=True)
+# dt_current_expr                        = sympy.Symbol("delta_t_current", real=True)
 
 # symbol collections
 const_syms                                                   = hstack( [ alpha_expr, beta_expr, gamma_expr, d_expr, m_expr, matrix(I_expr).A1, matrix(f_external_expr).A1 ] )
 const_and_x_syms                                             = hstack( [ const_syms, matrix(x_expr).A1 ] )
 const_and_x_and_u_syms                                       = hstack( [ const_syms, matrix(x_expr).A1, matrix(u_expr).A1 ] )
-const_and_xcurrent_and_xnext_and_ucurrent_and_dtcurrent_syms = hstack( [ const_syms, matrix(x_current_expr).A1, matrix(x_next_expr).A1, matrix(u_current_expr).A1, dt_current_expr ] )
+# const_and_xcurrent_and_xnext_and_ucurrent_and_dtcurrent_syms = hstack( [ const_syms, matrix(x_current_expr).A1, matrix(x_next_expr).A1, matrix(u_current_expr).A1, dt_current_expr ] )
 
 sys_time_end = time.time()
 print "flashlight.quadrotor_3d: Finished constructing sympy symbols (%.03f seconds)." % (sys_time_end - sys_time_begin)
@@ -157,7 +152,7 @@ def construct_manipulator_matrix_expressions(x_expr,t_expr):
     G_expr = sympy_utils.construct_matrix_from_block_matrix( sympy.Matrix( [ [G_0_expr],                   [G_1_expr] ] ) )
     B_expr = sympy_utils.construct_matrix_from_block_matrix( sympy.Matrix( [ [B_0_expr],                   [B_1_expr] ] ) )
 
-    print "flashlight.quadrotor_3d: Finished constructing manipulator matrix expressions..."
+    print "flashlight.quadrotor_3d: Finished constructing manipulator matrix expressions."
 
     return H_expr,C_expr,G_expr,B_expr
 
@@ -169,7 +164,7 @@ def build_sympy_modules():
     sys_time_begin = time.time()
 
     # manipulator matrices
-    H_expr,C_expr,G_expr,B_expr = construct_manipulator_matrix_expressions(x_expr,t_expr)
+    H_expr,C_expr,G_expr,B_expr = construct_manipulator_matrix_expressions()
 
     # expressions to solve for df_dx and df_du
     q_dot_dot_expr = H_expr.inv()*(B_expr*u_expr - (C_expr*q_dot_expr + G_expr))
@@ -178,12 +173,12 @@ def build_sympy_modules():
     df_du_expr     = x_dot_expr.jacobian(u_expr)
 
     # expressions to solve for g_dynamics, given x_current x_next u_current dt_current
-    x_dot_current_expr           = x_dot_expr.subs( dict( zip(x_expr,x_current_expr) + zip(u_expr,u_current_expr) ) )
-    g_dynamics_ti_expr           = x_next_expr - (x_current_expr + x_dot_current_expr*dt_current_expr)
-    dgdynamicsti_dxcurrent_expr  = g_dynamics_ti_expr.jacobian(x_current_expr)
-    dgdynamicsti_dxnext_expr     = g_dynamics_ti_expr.jacobian(x_next_expr)
-    dgdynamicsti_ducurrent_expr  = g_dynamics_ti_expr.jacobian(u_current_expr)
-    dgdynamicsti_ddtcurrent_expr = g_dynamics_ti_expr.diff(dt_current_expr)
+    # x_dot_current_expr           = x_dot_expr.subs( dict( zip(x_expr,x_current_expr) + zip(u_expr,u_current_expr) ) )
+    # g_dynamics_ti_expr           = x_next_expr - (x_current_expr + x_dot_current_expr*dt_current_expr)
+    # dgdynamicsti_dxcurrent_expr  = g_dynamics_ti_expr.jacobian(x_current_expr)
+    # dgdynamicsti_dxnext_expr     = g_dynamics_ti_expr.jacobian(x_next_expr)
+    # dgdynamicsti_ducurrent_expr  = g_dynamics_ti_expr.jacobian(u_current_expr)
+    # dgdynamicsti_ddtcurrent_expr = g_dynamics_ti_expr.diff(dt_current_expr)
 
     sys_time_end = time.time()
     print "flashlight.quadrotor_3d: Finished constructing sympy expressions (%.03f seconds)." % (sys_time_end - sys_time_begin)
@@ -258,9 +253,9 @@ print "flashlight.quadrotor_3d: Finished loading sympy modules (%.03f seconds)."
 
 def pack_state(p, theta, psi, phi, p_dot, theta_dot, psi_dot, phi_dot):
 
-    x     = matrix( [ p.item(0), p.item(1), p.item(2), theta, psi, phi, p_dot.item(0), p_dot.item(1), p_dot.item(2), theta_dot, psi_dot, phi_dot ] ).T
-    q     = matrix( [ p.item(0), p.item(1), p.item(2), theta, psi, phi ] ).T
+    q     = matrix( [ p.item(0),     p.item(1),     p.item(2),     theta,     psi,     phi ] ).T
     q_dot = matrix( [ p_dot.item(0), p_dot.item(1), p_dot.item(2), theta_dot, psi_dot, phi_dot ] ).T
+    x     = matrix( r_[ q.A1, q_dot.A1 ] ).T
 
     return x, q, q_dot
 
@@ -281,9 +276,9 @@ def unpack_state(x):
 
 def pack_state_space_trajectory(p, theta, psi, phi, p_dot, theta_dot, psi_dot, phi_dot):
 
-    x     = c_[ p, theta, psi, phi, p_dot, theta_dot, psi_dot, phi_dot ]
-    q     = c_[ p, theta, psi, phi ]
+    q     = c_[ p,     theta,     psi,     phi ]
     q_dot = c_[ p_dot, theta_dot, psi_dot, phi_dot ]
+    x     = c_[ q, q_dot ]
 
     return x, q, q_dot
 
@@ -306,10 +301,10 @@ def pack_state_space_trajectory_and_derivatives(q_qdot_qdotdot):
 
     p, p_dot, p_dot_dot, theta, theta_dot, theta_dot_dot, psi, psi_dot, psi_dot_dot, phi, phi_dot, phi_dot_dot = q_qdot_qdotdot
 
-    x         = c_[ p, theta, psi, phi, p_dot, theta_dot, psi_dot, phi_dot ]
-    q         = c_[ p, theta, psi, phi ]
-    q_dot     = c_[ p_dot, theta_dot, psi_dot, phi_dot ]
+    q         = c_[ p,         theta,         psi,         phi ]
+    q_dot     = c_[ p_dot,     theta_dot,     psi_dot,     phi_dot ]
     q_dot_dot = c_[ p_dot_dot, theta_dot_dot, psi_dot_dot, phi_dot_dot ]
+    x         = c_[ q, q_dot ]
 
     return x, q, q_dot, q_dot_dot
 
@@ -679,7 +674,6 @@ def draw(t, x, t_nominal=None, x_nominal=None, tmp_dir="tmp", request_delete_tmp
         assert t_nominal is not None
 
     if t_nominal is not None and x_nominal is not None:
-        x_nominal_interp_func = interpolate_utils.interp1d_vector_wrt_scalar(t_nominal, x_nominal, kind="linear")
         p_nominal, theta_nominal, psi_nominal, phi_nominal, p_dot_nominal, theta_dot_nominal, psi_dot_nominal, phi_dot_nominal, q_nominal, q_dot_nominal = unpack_state_space_trajectory(x_nominal)
 
     p, theta, psi, phi, p_dot, theta_dot, psi_dot, phi_dot, q, q_dot = unpack_state_space_trajectory(x)
@@ -730,10 +724,8 @@ def draw(t, x, t_nominal=None, x_nominal=None, tmp_dir="tmp", request_delete_tmp
 
     mayavi.mlab.figure(size=(img_width,img_height))
 
-    #invisible trajectory to set the appropriate camera scaling
-    pts = mayavi.mlab.quiver3d(p[:,2], p[:,1], p[:,0], ones(p.shape[0]), ones(p.shape[0]), ones(p.shape[0]), scalars=t, mode="sphere", scale_factor=s_trajectory, opacity=0.0)
-    pts.glyph.color_mode = "color_by_scalar"
-    pts.glyph.glyph_source.glyph_source.center = [0,0,0]
+    # invisible trajectory to set the appropriate camera scaling
+    mayavi.mlab.plot3d(p[:,2], p[:,1], p[:,0], t, tube_radius=s_trajectory, opacity=0.0)
 
     # center
     points3d_quad_center = mayavi.mlab.points3d(0.0, 0.0, 0.0, scale_factor=s_quad_center, color=c_quad_center)
@@ -765,6 +757,7 @@ def draw(t, x, t_nominal=None, x_nominal=None, tmp_dir="tmp", request_delete_tmp
     mayavi.mlab.plot3d([0.0,5.0], [0.0,0.0], [0.0,0.0], tube_radius=s_world_axis, color=c_world_axis_x)
 
     if t_nominal is not None and x_nominal is not None:
+
         pts = mayavi.mlab.quiver3d(p_nominal[:,2], p_nominal[:,1], p_nominal[:,0], ones(p_nominal.shape[0]), ones(p_nominal.shape[0]), ones(p_nominal.shape[0]), scalars=t_nominal, mode="sphere", scale_factor=s_trajectory)
         pts.glyph.color_mode = "color_by_scalar"
         pts.glyph.glyph_source.glyph_source.center = [0,0,0]
@@ -836,7 +829,7 @@ def draw(t, x, t_nominal=None, x_nominal=None, tmp_dir="tmp", request_delete_tmp
         while 1:
             x_ti = matrix(x[ti]).T
             draw_quad(x_ti)
-            ti   = (ti+1)%x.shape[0]
+            ti = (ti+1)%x.shape[0]
             yield
 
     def render_images():
