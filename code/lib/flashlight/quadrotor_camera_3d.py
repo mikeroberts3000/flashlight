@@ -772,7 +772,7 @@ def compute_state_space_trajectory_and_derivatives(p_body,p_look_at,y_axis_cam_h
 
 
 
-def compute_control_trajectory(q_qdot_qdotdot):
+def compute_control_trajectory(q_qdot_qdotdot, rtol=1e-5, atol=1e-8):
 
     x, q, q_dot, q_dot_dot = pack_state_space_trajectory_and_derivatives(q_qdot_qdotdot)
     num_timesteps          = q.shape[0]
@@ -787,7 +787,7 @@ def compute_control_trajectory(q_qdot_qdotdot):
         H, C, G, B   = compute_manipulator_matrices(x_ti)
         u_ti         = linalg.pinv(B)*(H*q_dot_dot_ti + C*q_dot_ti + G)
 
-        assert allclose(B*u_ti, H*q_dot_dot_ti + C*q_dot_ti + G)
+        assert allclose(B*u_ti, H*q_dot_dot_ti + C*q_dot_ti + G, rtol, atol)
 
         u[ti,:] = matrix(u_ti).A1
 
