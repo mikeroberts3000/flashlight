@@ -230,7 +230,7 @@ dummy:
 	@echo "Build finished. Dummy builder generates no files."
 
 .PHONY: html_and_copy_to_docs
-html:
+html_and_copy_to_docs:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
