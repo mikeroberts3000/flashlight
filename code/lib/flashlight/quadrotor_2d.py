@@ -471,6 +471,8 @@ def compute_control_trajectory(q_qdot_qdotdot):
 
 def draw(t, x, t_nominal=None, x_nominal=None, inline=False):
 
+    import matplotlib.animation
+
     if t_nominal is not None:
         assert x_nominal is not None
 
@@ -504,7 +506,9 @@ def draw(t, x, t_nominal=None, x_nominal=None, inline=False):
     p_y_pad = 0.1*(p_y_max - p_y_min)
     p_x_pad = 0.1*(p_x_max - p_x_min)
 
-    if not inline:
+    if inline:
+        rc("animation", html="html5")
+    else:
         plt.switch_backend("Qt4Agg")
 
     fig = figure()

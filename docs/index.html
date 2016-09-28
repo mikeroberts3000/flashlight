@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Welcome to flashlight’s documentation! &mdash; flashlight 0.0.1 documentation</title>
+    <title>Welcome to flashlight &mdash; flashlight 0.0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -39,21 +39,63 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="welcome-to-flashlight-s-documentation">
-<h1>Welcome to flashlight&#8217;s documentation!<a class="headerlink" href="#welcome-to-flashlight-s-documentation" title="Permalink to this headline">¶</a></h1>
-<p>Contents:</p>
-<div class="toctree-wrapper compound">
+  <div class="toctree-wrapper compound">
 <ul class="simple">
 </ul>
 </div>
+<div class="section" id="welcome-to-flashlight">
+<h1>Welcome to flashlight<a class="headerlink" href="#welcome-to-flashlight" title="Permalink to this headline">¶</a></h1>
+<p>flashlight is a lightweight Python library for analyzing and solving quadrotor control problems.
+flashlight enables you to easily solve for <em>minimum snap</em> trajectories that go through a sequence of waypoints, compute the required control forces along trajectories, execute the trajectories in a physics simulator, and visualize the simulation results.
+flashlight also makes it easy to simulate external disturbances (e.g., gusts of wind), and to recover from these disturbances using time-varying LQR feedback control.
+flashlight includes models for a 2D quadrotor, a 3D quadrotor, and a 3D quadrotor camera.</p>
+<p>The following code snippet shows how easy it is to start analyzing quadrotor trajectories using flashlight.
+In this code snippet, we generate the control forces required for 2D quadrotor to follow a simple trajectory:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pylab</span> <span class="k">import</span> <span class="o">*</span><span class="p">;</span> <span class="kn">import</span> <span class="nn">scipy.integrate</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">flashlight.interpolate_utils</span> <span class="k">as</span> <span class="nn">interpolate_utils</span>
+<span class="kn">import</span> <span class="nn">flashlight.quadrotor_2d</span>      <span class="k">as</span> <span class="nn">quadrotor_2d</span>
+
+<span class="c1"># Define a simple position trajectory in 2D.</span>
+<span class="n">num_samples</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span>
+<span class="n">t_begin</span>     <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">t_end</span>       <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">pi</span><span class="p">;</span>
+<span class="n">dt</span>          <span class="o">=</span> <span class="p">(</span><span class="n">t_end</span> <span class="o">-</span> <span class="n">t_begin</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">num_samples</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="n">t_begin</span><span class="p">,</span> <span class="n">t_end</span><span class="p">,</span> <span class="n">num_samples</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">c_</span><span class="p">[</span> <span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">t</span><span class="p">,</span> <span class="n">t</span> <span class="p">]</span>
+
+<span class="c1"># Compute the corresponding state space trajectory and control trajectories for a 2D quadrotor.</span>
+<span class="n">q_qdot_qdotdot</span> <span class="o">=</span> <span class="n">quadrotor_2d</span><span class="o">.</span><span class="n">compute_state_space_trajectory_and_derivatives</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+<span class="n">u</span>              <span class="o">=</span> <span class="n">quadrotor_2d</span><span class="o">.</span><span class="n">compute_control_trajectory</span><span class="p">(</span><span class="n">q_qdot_qdotdot</span><span class="p">)</span>
+
+<span class="c1"># Define a function that interpolates the control trajectory in between time samples.</span>
+<span class="n">u_interp_func</span> <span class="o">=</span> <span class="n">interpolate_utils</span><span class="o">.</span><span class="n">interp1d_vector_wrt_scalar</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;cubic&quot;</span><span class="p">)</span>
+
+<span class="c1"># Define a simulation loop.</span>
+<span class="k">def</span> <span class="nf">compute_x_dot</span><span class="p">(</span><span class="n">x_t</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+
+    <span class="c1"># Get the current control vector.</span>
+    <span class="n">u_t</span> <span class="o">=</span> <span class="n">u_interp_func</span><span class="p">(</span><span class="n">clip</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t_begin</span><span class="p">,</span> <span class="n">t_end</span><span class="p">))</span>
+
+    <span class="c1"># Compute the state derivative from the current state and current control.</span>
+    <span class="n">x_dot_t</span> <span class="o">=</span> <span class="n">quadrotor_2d</span><span class="o">.</span><span class="n">compute_x_dot</span><span class="p">(</span><span class="n">x_t</span><span class="p">,</span> <span class="n">u_t</span><span class="p">)</span><span class="o">.</span><span class="n">A1</span>
+
+    <span class="k">return</span> <span class="n">x_dot_t</span>
+
+<span class="c1"># Simulate.</span>
+<span class="n">x_nominal</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">quadrotor_2d</span><span class="o">.</span><span class="n">pack_state_space_trajectory_and_derivatives</span><span class="p">(</span><span class="n">q_qdot_qdotdot</span><span class="p">)</span>
+<span class="n">x_0</span>                <span class="o">=</span> <span class="n">x_nominal</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">x_sim</span>              <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">integrate</span><span class="o">.</span><span class="n">odeint</span><span class="p">(</span><span class="n">compute_x_dot</span><span class="p">,</span> <span class="n">x_0</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+
+<span class="c1"># Plot the results.</span>
+<span class="n">quadrotor_2d</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x_sim</span><span class="p">,</span> <span class="n">t_nominal</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">x_nominal</span><span class="o">=</span><span class="n">x_nominal</span><span class="p">,</span> <span class="n">inline</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
 </div>
-<div class="section" id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
-<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
-<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
-</ul>
+</div>
+<div class="section" id="hello-world">
+<h1>Hello World<a class="headerlink" href="#hello-world" title="Permalink to this headline">¶</a></h1>
+<p>Blah Blah Blah</p>
 </div>
 
 
@@ -64,8 +106,8 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Welcome to flashlight&#8217;s documentation!</a></li>
-<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+<li><a class="reference internal" href="#">Welcome to flashlight</a></li>
+<li><a class="reference internal" href="#hello-world">Hello World</a></li>
 </ul>
 <div class="relations">
 <h3>Related Topics</h3>
