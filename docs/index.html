@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Welcome to flashlight &mdash; flashlight 0.0.1 documentation</title>
+    <title>Welcome to Flashlight &mdash; flashlight 0.0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -44,28 +44,29 @@
 </ul>
 </div>
 <div class="section" id="welcome-to-flashlight">
-<h1>Welcome to flashlight<a class="headerlink" href="#welcome-to-flashlight" title="Permalink to this headline">¶</a></h1>
-<p>flashlight is a lightweight Python library for analyzing and solving quadrotor control problems.
-flashlight enables you to easily solve for <em>minimum snap</em> trajectories that go through a sequence of waypoints, compute the required control forces along trajectories, execute the trajectories in a physics simulator, and visualize the simulation results.
-flashlight also makes it easy to simulate external disturbances (e.g., gusts of wind), and to recover from these disturbances using time-varying LQR feedback control.
-flashlight includes models for a 2D quadrotor, a 3D quadrotor, and a 3D quadrotor camera.</p>
-<p>The following code snippet shows how easy it is to start analyzing quadrotor trajectories using flashlight.
-In this code snippet, we generate the control forces required for 2D quadrotor to follow a simple trajectory:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pylab</span> <span class="k">import</span> <span class="o">*</span><span class="p">;</span> <span class="kn">import</span> <span class="nn">scipy.integrate</span><span class="p">;</span>
+<h1>Welcome to Flashlight<a class="headerlink" href="#welcome-to-flashlight" title="Permalink to this headline">¶</a></h1>
+<p>Flashlight is a lightweight Python library for analyzing and solving quadrotor control problems.
+Flashlight enables you to easily solve for minimum snap trajectories that go through a sequence of waypoints, compute the required control forces along trajectories, execute the trajectories in a physics simulator, and visualize the simulation results.
+Flashlight also makes it easy to simulate external disturbances, and to recover from those disturbances using time-varying LQR feedback control.
+Flashlight includes physical models for 2D quadrotors, 3D quadrotors, and 3D quadrotor cameras.</p>
+<p>Flashlight was designed and implemented by <a class="reference external" href="http://graphics.stanford.edu/~mlrobert">Mike Roberts</a>.</p>
+<p>The following code snippet shows how easy it is to start analyzing quadrotor trajectories using Flashlight.
+In this code snippet, we generate the control forces required for a 2D quadrotor to follow a simple trajectory, and simulate the results:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pylab</span> <span class="k">import</span> <span class="o">*</span><span class="p">;</span> <span class="kn">import</span> <span class="nn">scipy.integrate</span>
 
 <span class="kn">import</span> <span class="nn">flashlight.interpolate_utils</span> <span class="k">as</span> <span class="nn">interpolate_utils</span>
 <span class="kn">import</span> <span class="nn">flashlight.quadrotor_2d</span>      <span class="k">as</span> <span class="nn">quadrotor_2d</span>
 
 <span class="c1"># Define a simple position trajectory in 2D.</span>
-<span class="n">num_samples</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span>
-<span class="n">t_begin</span>     <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="n">t_end</span>       <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">pi</span><span class="p">;</span>
-<span class="n">dt</span>          <span class="o">=</span> <span class="p">(</span><span class="n">t_end</span> <span class="o">-</span> <span class="n">t_begin</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">num_samples</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+<span class="n">num_samples</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">t_begin</span>     <span class="o">=</span> <span class="mi">0</span>
+<span class="n">t_end</span>       <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">pi</span>
+<span class="n">dt</span>          <span class="o">=</span> <span class="p">(</span><span class="n">t_end</span> <span class="o">-</span> <span class="n">t_begin</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">num_samples</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 
 <span class="n">t</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="n">t_begin</span><span class="p">,</span> <span class="n">t_end</span><span class="p">,</span> <span class="n">num_samples</span><span class="p">)</span>
 <span class="n">p</span> <span class="o">=</span> <span class="n">c_</span><span class="p">[</span> <span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">t</span><span class="p">,</span> <span class="n">t</span> <span class="p">]</span>
 
-<span class="c1"># Compute the corresponding state space trajectory and control trajectories for a 2D quadrotor.</span>
+<span class="c1"># Compute the corresponding state space trajectory and control trajectory for a 2D quadrotor.</span>
 <span class="n">q_qdot_qdotdot</span> <span class="o">=</span> <span class="n">quadrotor_2d</span><span class="o">.</span><span class="n">compute_state_space_trajectory_and_derivatives</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
 <span class="n">u</span>              <span class="o">=</span> <span class="n">quadrotor_2d</span><span class="o">.</span><span class="n">compute_control_trajectory</span><span class="p">(</span><span class="n">q_qdot_qdotdot</span><span class="p">)</span>
 
@@ -92,10 +93,109 @@ In this code snippet, we generate the control forces required for 2D quadrotor t
 <span class="n">quadrotor_2d</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x_sim</span><span class="p">,</span> <span class="n">t_nominal</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">x_nominal</span><span class="o">=</span><span class="n">x_nominal</span><span class="p">,</span> <span class="n">inline</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>This code example produces the following animation, which shows our 2D quadrotor correctly following the intended trajectory:</p>
+<video width="648.0" height="432.0" controls autoplay loop>
+  <source type="video/mp4" src="_static/flashlight/welcome_to_flashlight.mp4" />
+</video></div>
+<div class="section" id="installing-flashlight">
+<h1>Installing Flashlight<a class="headerlink" href="#installing-flashlight" title="Permalink to this headline">¶</a></h1>
+<p>The steps for installing Flashlight are as follows.</p>
+<ol class="arabic">
+<li><p class="first">Install all of Flashlight&#8217;s dependencies. The core functionality in Flashlight depends on the following Python libraries:</p>
+<blockquote>
+<div><ul class="simple">
+<li>IPython</li>
+<li>NumPy</li>
+<li>Matplotlib</li>
+<li>Scikit-learn</li>
+<li>SciPy</li>
+<li>SymPy</li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+<blockquote>
+<div><p>Additionally, some of the debug rendering functionality in Flashlight depends on the following libraries:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Mayavi</li>
+<li>OpenCV</li>
+<li>VTK</li>
+</ul>
+</div></blockquote>
+<p>Each of these libraries comes pre-installed with Enthought Canopy, or can be installed easily using the using the Enthought Canopy package manager.</p>
+</div></blockquote>
+<ol class="arabic" start="2">
+<li><p class="first">Download the Flashlight source code from our <a class="reference external" href="http://github.com/mikeroberts3000/flashlight">GitHub repository</a>.</p>
+</li>
+<li><p class="first">In any folder you&#8217;d like to use Flashlight, copy our <code class="docutils literal"><span class="pre">path/to/flashlight/code/utils/path_utils.py</span></code> file into that folder.</p>
+</li>
+<li><p class="first">Include the following code snippet in your Python code before importing Flashlight:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">path_utils</span>
+<span class="n">path_utils</span><span class="o">.</span><span class="n">add_relative_to_current_source_file_path_to_sys_path</span><span class="p">(</span><span class="s2">&quot;path/to/flashlight/code/lib&quot;</span><span class="p">)</span>
+</pre></div>
 </div>
-<div class="section" id="hello-world">
-<h1>Hello World<a class="headerlink" href="#hello-world" title="Permalink to this headline">¶</a></h1>
-<p>Blah Blah Blah</p>
+</li>
+<li><p class="first">Verify that you can import Flashlight:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">flashlight</span>
+<span class="nb">print</span> <span class="n">flashlight</span><span class="o">.</span><span class="n">__version__</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>After completing these steps, you&#8217;re ready to start using Flashlight.</p>
+</div>
+<div class="section" id="examples">
+<h1>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h1>
+<p>These example notebooks describe how to use Flashlight to analyze and solve a variety of quadrotor control problems:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://nbviewer.jupyter.org/github/mikeroberts3000/flashlight/blob/master/code/examples/jupyter/01%20-%20Creating%20minimum%20snap%20splines%20in%201D.ipynb">Creating minimum snap splines in 1D</a></li>
+<li><a class="reference external" href="http://nbviewer.jupyter.org/github/mikeroberts3000/flashlight/blob/master/code/examples/jupyter/02%20-%20Creating%20minimum%20snap%20splines%20in%202D%20and%203D.ipynb">Creating minimum snap splines in 2D and 3D</a></li>
+<li><a class="reference external" href="http://nbviewer.jupyter.org/github/mikeroberts3000/flashlight/blob/master/code/examples/jupyter/03%20-%20Re-timing%20the%20progress%20along%20a%20parametric%20curve.ipynb">Re-timing the progress along a parametric curve</a></li>
+<li><a class="reference external" href="http://nbviewer.jupyter.org/github/mikeroberts3000/flashlight/blob/master/code/examples/jupyter/04%20-%20Computing%20the%20control%20forces%20required%20for%20a%202D%20quadrotor%20to%20follow%20a%20trajectory.ipynb">Computing the control forces required for a 2D quadrotor to follow a trajectory</a></li>
+<li><a class="reference external" href="http://nbviewer.jupyter.org/github/mikeroberts3000/flashlight/blob/master/code/examples/jupyter/05%20-%20Applying%20LQR%20feedback%20control%20to%20stabilize%20a%202D%20quadrotor%20at%20a%20point.ipynb">Applying LQR feedback control to stabilize a 2D quadrotor at a point</a></li>
+<li><a class="reference external" href="http://nbviewer.jupyter.org/github/mikeroberts3000/flashlight/blob/master/code/examples/jupyter/06%20-%20Applying%20time-varying%20LQR%20feedback%20control%20to%20stabilize%20a%202D%20quadrotor%20along%20a%20trajectory.ipynb">Applying time-varying LQR feedback control to stabilize a 2D quadrotor along a trajectory</a></li>
+<li><a class="reference external" href="http://nbviewer.jupyter.org/github/mikeroberts3000/flashlight/blob/master/code/examples/jupyter/07%20-%20Applying%20LQR%20feedback%20control%20in%202D%2C%20handling%20angular%20wrapping%20correctly.ipynb">Applying LQR feedback control in 2D, handling angular wrapping correctly</a></li>
+<li><a class="reference external" href="http://nbviewer.jupyter.org/github/mikeroberts3000/flashlight/blob/master/code/examples/jupyter/08%20-%20Computing%20the%20control%20forces%20required%20for%20a%203D%20quadrotor%20to%20follow%20a%20trajectory.ipynb">Computing the control forces required for a 3D quadrotor to follow a trajectory</a></li>
+<li><a class="reference external" href="http://nbviewer.jupyter.org/github/mikeroberts3000/flashlight/blob/master/code/examples/jupyter/09%20-%20Applying%20LQR%20feedback%20control%20to%20stabilize%20a%203D%20quadrotor%20at%20a%20point.ipynb">Applying LQR feedback control to stabilize a 3D quadrotor at a point</a></li>
+<li><a class="reference external" href="http://nbviewer.jupyter.org/github/mikeroberts3000/flashlight/blob/master/code/examples/jupyter/10%20-%20Applying%20time-varying%20LQR%20feedback%20control%20to%20stabilize%20a%203D%20quadrotor%20along%20a%20trajectory.ipynb">Applying time-varying LQR feedback control to stabilize a 3D quadrotor along a trajectory</a></li>
+<li><a class="reference external" href="http://nbviewer.jupyter.org/github/mikeroberts3000/flashlight/blob/master/code/examples/jupyter/11%20-%20Applying%20LQR%20feedback%20control%20in%203D%2C%20handling%20angular%20wrapping%20correctly.ipynb">Applying LQR feedback control in 3D, handling angular wrapping correctly</a></li>
+<li><a class="reference external" href="http://nbviewer.jupyter.org/github/mikeroberts3000/flashlight/blob/master/code/examples/jupyter/12%20-%20Computing%20the%20control%20forces%20required%20for%20a%203D%20quadrotor%20camera%20to%20follow%20a%20look-from%20look-at%20trajectory.ipynb">Computing the control forces required for a 3D quadrotor camera to follow a look-from look-at trajectory</a></li>
+</ul>
+</div>
+<div class="section" id="reproducing-experimental-results">
+<h1>Reproducing Experimental Results<a class="headerlink" href="#reproducing-experimental-results" title="Permalink to this headline">¶</a></h1>
+<p>As part of the Flashlight source code, we include notebooks that reproduce the experimental results from our research papers.</p>
+<div class="line-block">
+<div class="line"><a class="reference external" href="http://stanford-gfx.github.io/Horus">An Interactive Tool for Designing Quadrotor Camera Shots</a></div>
+<div class="line">Niels Joubert, Mike Roberts, Anh Truong, Floraine Berthouzoz, Pat Hanrahan</div>
+<div class="line">ACM Transactions on Graphics 35(4) (SIGGRAPH 2016)</div>
+</div>
+<ul class="simple">
+<li><a class="reference external" href="http://nbviewer.jupyter.org/github/mikeroberts3000/flashlight/blob/master/code/experiments/00_siggraph_asia_2015/jupyter/00%20-%20Evaluating%20different%20interpolation%20methods.ipynb">Evaluating different interpolation methods</a></li>
+<li><a class="reference external" href="http://nbviewer.jupyter.org/github/mikeroberts3000/flashlight/blob/master/code/experiments/00_siggraph_asia_2015/jupyter/01%20-%20Evaluating%20different%20spline%20degrees%20and%20derivatives.ipynb">Evaluating different spline degrees and derivatives</a></li>
+</ul>
+</div>
+<div class="section" id="citing-flashlight">
+<h1>Citing Flashlight<a class="headerlink" href="#citing-flashlight" title="Permalink to this headline">¶</a></h1>
+<p>If you use Flashlight for published work, we encourage you to cite it as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nd">@misc</span><span class="p">{</span><span class="n">flashlight</span><span class="p">,</span>
+    <span class="n">author</span> <span class="o">=</span> <span class="p">{</span><span class="n">Mike</span> <span class="n">Roberts</span><span class="p">},</span>
+    <span class="n">title</span>  <span class="o">=</span> <span class="p">{</span><span class="n">Flashlight</span><span class="p">:</span> <span class="n">A</span> <span class="n">Python</span> <span class="n">Library</span> <span class="k">for</span> <span class="n">Analyzing</span> <span class="ow">and</span> <span class="n">Solving</span> <span class="n">Quadrotor</span> <span class="n">Control</span> <span class="n">Problems</span><span class="p">},</span>
+    <span class="n">year</span>   <span class="o">=</span> <span class="p">{</span><span class="mi">2016</span><span class="p">},</span>
+    <span class="n">url</span>    <span class="o">=</span> <span class="p">{</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">mikeroberts3000</span><span class="o">.</span><span class="n">github</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">flashlight</span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Additionally, if you use any of the functions in <code class="docutils literal"><span class="pre">quadrotor_3d</span></code>, <code class="docutils literal"><span class="pre">quadrotor_camera_3d</span></code>, or <code class="docutils literal"><span class="pre">spline_utils</span></code>, we encourage you to cite the following paper:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nd">@article</span><span class="p">{</span><span class="n">joubert</span><span class="p">:</span><span class="mi">2015</span><span class="p">,</span>
+    <span class="n">author</span>  <span class="o">=</span> <span class="p">{</span><span class="n">Niels</span> <span class="n">Joubert</span> <span class="n">AND</span> <span class="n">Mike</span> <span class="n">Roberts</span> <span class="n">AND</span> <span class="n">Anh</span> <span class="n">Truong</span> <span class="n">AND</span> <span class="n">Floraine</span> <span class="n">Berthouzoz</span> <span class="n">AND</span> <span class="n">Pat</span> <span class="n">Hanrahan</span><span class="p">},</span>
+    <span class="n">title</span>   <span class="o">=</span> <span class="p">{</span><span class="n">An</span> <span class="n">Interactive</span> <span class="n">Tool</span> <span class="k">for</span> <span class="n">Designing</span> <span class="n">Quadrotor</span> <span class="n">Camera</span> <span class="n">Shots</span><span class="p">},</span>
+    <span class="n">journal</span> <span class="o">=</span> <span class="p">{</span><span class="n">ACM</span> <span class="n">Transactions</span> <span class="n">on</span> <span class="n">Graphics</span> <span class="p">(</span><span class="n">SIGGRAPH</span> <span class="n">Asia</span> <span class="mi">2015</span><span class="p">)},</span>
+    <span class="n">year</span>    <span class="o">=</span> <span class="p">{</span><span class="mi">2015</span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </div>
 
 
@@ -106,8 +206,11 @@ In this code snippet, we generate the control forces required for 2D quadrotor t
         <div class="sphinxsidebarwrapper">
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Welcome to flashlight</a></li>
-<li><a class="reference internal" href="#hello-world">Hello World</a></li>
+<li><a class="reference internal" href="#">Welcome to Flashlight</a></li>
+<li><a class="reference internal" href="#installing-flashlight">Installing Flashlight</a></li>
+<li><a class="reference internal" href="#examples">Examples</a></li>
+<li><a class="reference internal" href="#reproducing-experimental-results">Reproducing Experimental Results</a></li>
+<li><a class="reference internal" href="#citing-flashlight">Citing Flashlight</a></li>
 </ul>
 <div class="relations">
 <h3>Related Topics</h3>
