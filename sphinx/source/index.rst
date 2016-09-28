@@ -155,5 +155,7 @@ Additionally, if you use any of the functions in ``curve_utils``, ``quadrotor_3d
         author  = {Niels Joubert AND Mike Roberts AND Anh Truong AND Floraine Berthouzoz AND Pat Hanrahan},
         title   = {An Interactive Tool for Designing Quadrotor Camera Shots},
         journal = {ACM Transactions on Graphics (SIGGRAPH Asia 2015)},
+        volume  = {34},
+        number  = {6},        
         year    = {2015}
     }
