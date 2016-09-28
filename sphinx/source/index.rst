@@ -149,7 +149,7 @@ If you use Flashlight for published work, we encourage you to cite it as follows
         url    = {http://mikeroberts3000.github.io/flashlight}
     }
 
-Additionally, if you use any of the functions in ``quadrotor_3d``, ``quadrotor_camera_3d``, or ``spline_utils`` for published work, we encourage you to cite the following paper::
+Additionally, if you use any of the functions in ``curve_utils``, ``quadrotor_3d``, ``quadrotor_camera_3d``, or ``spline_utils`` for published work, we encourage you to cite the following paper::
 
     @article{joubert:2015,
         author  = {Niels Joubert AND Mike Roberts AND Anh Truong AND Floraine Berthouzoz AND Pat Hanrahan},
