@@ -121,10 +121,10 @@ html_theme_options = {
     'logo_name':'true',
     'logo_text_align':'center',
     'description':'A Python library for analyzing and solving quadrotor control problems',
-    'github_user':'mikeroberts3000',
-    'github_repo':'flashlight',
+    # 'github_user':'mikeroberts3000',
+    # 'github_repo':'flashlight',
     'github_banner':'true',
-    'github_type':'star',
+    # 'github_type':'star',
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
