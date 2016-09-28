@@ -14,8 +14,6 @@ Flashlight enables you to easily solve for minimum snap trajectories that go thr
 Flashlight also makes it easy to simulate external disturbances, and to recover from those disturbances using time-varying LQR feedback control.
 Flashlight includes physical models for 2D quadrotors, 3D quadrotors, and 3D quadrotor cameras.
 
-Flashlight was designed and implemented by `Mike Roberts <http://graphics.stanford.edu/~mlrobert>`_.
-
 The following code snippet shows how easy it is to start analyzing quadrotor trajectories using Flashlight.
 In this code snippet, we generate the control forces required for a 2D quadrotor to follow a simple trajectory, and simulate the results::
 
@@ -68,6 +66,8 @@ This code example produces the following animation, which shows our 2D quadrotor
       <source type="video/mp4" src="_static/flashlight/welcome_to_flashlight.mp4" />
     </video>
 
+Flashlight is designed and implemented by `Mike Roberts <http://graphics.stanford.edu/~mlrobert>`_.
+
 Installing Flashlight
 =====================
 
@@ -75,20 +75,20 @@ The steps for installing Flashlight are as follows.
 
 1. Install all of Flashlight's dependencies. The core functionality in Flashlight depends on the following Python libraries:
 
-    * IPython
-    * NumPy
-    * Matplotlib
-    * Scikit-learn
-    * SciPy
-    * SymPy
+    * `IPython <https://ipython.org>`_
+    * `NumPy <http://www.numpy.org>`_
+    * `Matplotlib <http://matplotlib.org>`_
+    * `scikit-learn <http://scikit-learn.org>`_
+    * `SciPy <http://scipy.org>`_
+    * `SymPy <http://www.sympy.org>`_
 
   Additionally, some of the debug rendering functionality in Flashlight depends on the following libraries:
 
-    * Mayavi
-    * OpenCV
-    * VTK
+    * `Mayavi <http://code.enthought.com/projects/mayavi>`_
+    * `OpenCV <http://opencv.org>`_ (the ``cv2`` Python module)
+    * `VTK <http://www.vtk.org>`_ (the ``vtk`` Python module)
 
-  Each of these libraries comes pre-installed with Enthought Canopy, or can be installed easily using the using the Enthought Canopy package manager.
+  Each of these libraries comes pre-installed with `Enthought Canopy <https://www.enthought.com/products/canopy>`_, or can be installed very easily using the using the Enthought Canopy package manager.
 
 2. Download the Flashlight source code from our `GitHub repository <http://github.com/mikeroberts3000/flashlight>`_.
 
@@ -124,8 +124,8 @@ These example notebooks describe how to use Flashlight to analyze and solve a va
 * `Applying LQR feedback control in 3D, handling angular wrapping correctly <http://nbviewer.jupyter.org/github/mikeroberts3000/flashlight/blob/master/code/examples/jupyter/11%20-%20Applying%20LQR%20feedback%20control%20in%203D%2C%20handling%20angular%20wrapping%20correctly.ipynb>`_
 * `Computing the control forces required for a 3D quadrotor camera to follow a look-from look-at trajectory <http://nbviewer.jupyter.org/github/mikeroberts3000/flashlight/blob/master/code/examples/jupyter/12%20-%20Computing%20the%20control%20forces%20required%20for%20a%203D%20quadrotor%20camera%20to%20follow%20a%20look-from%20look-at%20trajectory.ipynb>`_
 
-Reproducing Experimental Results
-================================
+Reproducible Research
+=====================
 
 As part of the Flashlight source code, we include notebooks that reproduce the experimental results from our research papers.
 

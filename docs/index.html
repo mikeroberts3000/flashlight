@@ -49,7 +49,6 @@
 Flashlight enables you to easily solve for minimum snap trajectories that go through a sequence of waypoints, compute the required control forces along trajectories, execute the trajectories in a physics simulator, and visualize the simulation results.
 Flashlight also makes it easy to simulate external disturbances, and to recover from those disturbances using time-varying LQR feedback control.
 Flashlight includes physical models for 2D quadrotors, 3D quadrotors, and 3D quadrotor cameras.</p>
-<p>Flashlight was designed and implemented by <a class="reference external" href="http://graphics.stanford.edu/~mlrobert">Mike Roberts</a>.</p>
 <p>The following code snippet shows how easy it is to start analyzing quadrotor trajectories using Flashlight.
 In this code snippet, we generate the control forces required for a 2D quadrotor to follow a simple trajectory, and simulate the results:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pylab</span> <span class="k">import</span> <span class="o">*</span><span class="p">;</span> <span class="kn">import</span> <span class="nn">scipy.integrate</span>
@@ -96,7 +95,8 @@ In this code snippet, we generate the control forces required for a 2D quadrotor
 <p>This code example produces the following animation, which shows our 2D quadrotor correctly following the intended trajectory:</p>
 <video width="648.0" height="432.0" controls autoplay loop>
   <source type="video/mp4" src="_static/flashlight/welcome_to_flashlight.mp4" />
-</video></div>
+</video><p>Flashlight is designed and implemented by <a class="reference external" href="http://graphics.stanford.edu/~mlrobert">Mike Roberts</a>.</p>
+</div>
 <div class="section" id="installing-flashlight">
 <h1>Installing Flashlight<a class="headerlink" href="#installing-flashlight" title="Permalink to this headline">¶</a></h1>
 <p>The steps for installing Flashlight are as follows.</p>
@@ -104,12 +104,12 @@ In this code snippet, we generate the control forces required for a 2D quadrotor
 <li><p class="first">Install all of Flashlight&#8217;s dependencies. The core functionality in Flashlight depends on the following Python libraries:</p>
 <blockquote>
 <div><ul class="simple">
-<li>IPython</li>
-<li>NumPy</li>
-<li>Matplotlib</li>
-<li>Scikit-learn</li>
-<li>SciPy</li>
-<li>SymPy</li>
+<li><a class="reference external" href="https://ipython.org">IPython</a></li>
+<li><a class="reference external" href="http://www.numpy.org">NumPy</a></li>
+<li><a class="reference external" href="http://matplotlib.org">Matplotlib</a></li>
+<li><a class="reference external" href="http://scikit-learn.org">scikit-learn</a></li>
+<li><a class="reference external" href="http://scipy.org">SciPy</a></li>
+<li><a class="reference external" href="http://www.sympy.org">SymPy</a></li>
 </ul>
 </div></blockquote>
 </li>
@@ -118,12 +118,12 @@ In this code snippet, we generate the control forces required for a 2D quadrotor
 <div><p>Additionally, some of the debug rendering functionality in Flashlight depends on the following libraries:</p>
 <blockquote>
 <div><ul class="simple">
-<li>Mayavi</li>
-<li>OpenCV</li>
-<li>VTK</li>
+<li><a class="reference external" href="http://code.enthought.com/projects/mayavi">Mayavi</a></li>
+<li><a class="reference external" href="http://opencv.org">OpenCV</a> (the <code class="docutils literal"><span class="pre">cv2</span></code> Python module)</li>
+<li><a class="reference external" href="http://www.vtk.org">VTK</a> (the <code class="docutils literal"><span class="pre">vtk</span></code> Python module)</li>
 </ul>
 </div></blockquote>
-<p>Each of these libraries comes pre-installed with Enthought Canopy, or can be installed easily using the using the Enthought Canopy package manager.</p>
+<p>Each of these libraries comes pre-installed with <a class="reference external" href="https://www.enthought.com/products/canopy">Enthought Canopy</a>, or can be installed very easily using the using the Enthought Canopy package manager.</p>
 </div></blockquote>
 <ol class="arabic" start="2">
 <li><p class="first">Download the Flashlight source code from our <a class="reference external" href="http://github.com/mikeroberts3000/flashlight">GitHub repository</a>.</p>
@@ -163,8 +163,8 @@ In this code snippet, we generate the control forces required for a 2D quadrotor
 <li><a class="reference external" href="http://nbviewer.jupyter.org/github/mikeroberts3000/flashlight/blob/master/code/examples/jupyter/12%20-%20Computing%20the%20control%20forces%20required%20for%20a%203D%20quadrotor%20camera%20to%20follow%20a%20look-from%20look-at%20trajectory.ipynb">Computing the control forces required for a 3D quadrotor camera to follow a look-from look-at trajectory</a></li>
 </ul>
 </div>
-<div class="section" id="reproducing-experimental-results">
-<h1>Reproducing Experimental Results<a class="headerlink" href="#reproducing-experimental-results" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="reproducible-research">
+<h1>Reproducible Research<a class="headerlink" href="#reproducible-research" title="Permalink to this headline">¶</a></h1>
 <p>As part of the Flashlight source code, we include notebooks that reproduce the experimental results from our research papers.</p>
 <div class="line-block">
 <div class="line"><a class="reference external" href="http://stanford-gfx.github.io/Horus">An Interactive Tool for Designing Quadrotor Camera Shots</a></div>
@@ -209,7 +209,7 @@ In this code snippet, we generate the control forces required for a 2D quadrotor
 <li><a class="reference internal" href="#">Welcome to Flashlight</a></li>
 <li><a class="reference internal" href="#installing-flashlight">Installing Flashlight</a></li>
 <li><a class="reference internal" href="#examples">Examples</a></li>
-<li><a class="reference internal" href="#reproducing-experimental-results">Reproducing Experimental Results</a></li>
+<li><a class="reference internal" href="#reproducible-research">Reproducible Research</a></li>
 <li><a class="reference internal" href="#citing-flashlight">Citing Flashlight</a></li>
 </ul>
 <div class="relations">
