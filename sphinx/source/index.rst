@@ -25,13 +25,13 @@ In this code snippet, we generate the control forces required for a 2D quadrotor
     # Define a simple position trajectory in 2D.
     num_samples = 200
     t_begin     = 0
-    t_end       = 4*pi
+    t_end       = pi
     dt          = (t_end - t_begin) / (num_samples - 1)
 
     t = linspace(t_begin, t_end, num_samples)
-    p = c_[ sin(t) + 0.5*t, t ]
+    p = c_[ sin(2*t) + t, t**2 ]
 
-    # Compute the corresponding state space trajectory and control trajectory for a 2D quadrotor.
+    # Compute the corresponding state space trajectory and control trajectories for a 2D quadrotor.
     q_qdot_qdotdot = quadrotor_2d.compute_state_space_trajectory_and_derivatives(p, dt)
     u              = quadrotor_2d.compute_control_trajectory(q_qdot_qdotdot)
 
@@ -44,7 +44,7 @@ In this code snippet, we generate the control forces required for a 2D quadrotor
         # Get the current control vector.
         u_t = u_interp_func(clip(t, t_begin, t_end))
         
-        # Compute the state derivative from the current state and current control.
+        # Compute the state derivative from the current state and current control vectors.
         x_dot_t = quadrotor_2d.compute_x_dot(x_t, u_t).A1
 
         return x_dot_t
@@ -56,7 +56,6 @@ In this code snippet, we generate the control forces required for a 2D quadrotor
 
     # Plot the results.
     quadrotor_2d.draw(t, x_sim, t_nominal=t, x_nominal=x_nominal, inline=True)
-
 
 This code example produces the following animation, which shows our 2D quadrotor correctly following the intended trajectory:
 
@@ -133,7 +132,7 @@ As part of the Flashlight source code, we include notebooks that reproduce the e
 
 | `An Interactive Tool for Designing Quadrotor Camera Shots <http://stanford-gfx.github.io/Horus>`_
 | Niels Joubert, Mike Roberts, Anh Truong, Floraine Berthouzoz, Pat Hanrahan
-| ACM Transactions on Graphics 35(4) (SIGGRAPH 2016)
+| *ACM Transactions on Graphics 35(4) (SIGGRAPH 2016)*
 
 * `Evaluating different interpolation methods <http://nbviewer.jupyter.org/github/mikeroberts3000/flashlight/blob/master/code/experiments/00_siggraph_asia_2015/jupyter/00%20-%20Evaluating%20different%20interpolation%20methods.ipynb>`_
 * `Evaluating different spline degrees and derivatives <http://nbviewer.jupyter.org/github/mikeroberts3000/flashlight/blob/master/code/experiments/00_siggraph_asia_2015/jupyter/01%20-%20Evaluating%20different%20spline%20degrees%20and%20derivatives.ipynb>`_
@@ -143,7 +142,7 @@ Citing Flashlight
 
 If you use Flashlight for published work, we encourage you to cite it as follows::
 
-    @misc{flashlight,
+    @misc{flashlight:2016,
         author = {Mike Roberts},
         title  = {Flashlight: A Python Library for Analyzing and Solving Quadrotor Control Problems},
         year   = {2016},

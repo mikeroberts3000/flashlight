@@ -59,13 +59,13 @@ In this code snippet, we generate the control forces required for a 2D quadrotor
 <span class="c1"># Define a simple position trajectory in 2D.</span>
 <span class="n">num_samples</span> <span class="o">=</span> <span class="mi">200</span>
 <span class="n">t_begin</span>     <span class="o">=</span> <span class="mi">0</span>
-<span class="n">t_end</span>       <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">pi</span>
+<span class="n">t_end</span>       <span class="o">=</span> <span class="n">pi</span>
 <span class="n">dt</span>          <span class="o">=</span> <span class="p">(</span><span class="n">t_end</span> <span class="o">-</span> <span class="n">t_begin</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">num_samples</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 
 <span class="n">t</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="n">t_begin</span><span class="p">,</span> <span class="n">t_end</span><span class="p">,</span> <span class="n">num_samples</span><span class="p">)</span>
-<span class="n">p</span> <span class="o">=</span> <span class="n">c_</span><span class="p">[</span> <span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">t</span><span class="p">,</span> <span class="n">t</span> <span class="p">]</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">c_</span><span class="p">[</span> <span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">t</span><span class="p">,</span> <span class="n">t</span><span class="o">**</span><span class="mi">2</span> <span class="p">]</span>
 
-<span class="c1"># Compute the corresponding state space trajectory and control trajectory for a 2D quadrotor.</span>
+<span class="c1"># Compute the corresponding state space trajectory and control trajectories for a 2D quadrotor.</span>
 <span class="n">q_qdot_qdotdot</span> <span class="o">=</span> <span class="n">quadrotor_2d</span><span class="o">.</span><span class="n">compute_state_space_trajectory_and_derivatives</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
 <span class="n">u</span>              <span class="o">=</span> <span class="n">quadrotor_2d</span><span class="o">.</span><span class="n">compute_control_trajectory</span><span class="p">(</span><span class="n">q_qdot_qdotdot</span><span class="p">)</span>
 
@@ -78,7 +78,7 @@ In this code snippet, we generate the control forces required for a 2D quadrotor
     <span class="c1"># Get the current control vector.</span>
     <span class="n">u_t</span> <span class="o">=</span> <span class="n">u_interp_func</span><span class="p">(</span><span class="n">clip</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t_begin</span><span class="p">,</span> <span class="n">t_end</span><span class="p">))</span>
 
-    <span class="c1"># Compute the state derivative from the current state and current control.</span>
+    <span class="c1"># Compute the state derivative from the current state and current control vectors.</span>
     <span class="n">x_dot_t</span> <span class="o">=</span> <span class="n">quadrotor_2d</span><span class="o">.</span><span class="n">compute_x_dot</span><span class="p">(</span><span class="n">x_t</span><span class="p">,</span> <span class="n">u_t</span><span class="p">)</span><span class="o">.</span><span class="n">A1</span>
 
     <span class="k">return</span> <span class="n">x_dot_t</span>
@@ -168,7 +168,7 @@ The core functionality in Flashlight depends on the following Python libraries:<
 <div class="line-block">
 <div class="line"><a class="reference external" href="http://stanford-gfx.github.io/Horus">An Interactive Tool for Designing Quadrotor Camera Shots</a></div>
 <div class="line">Niels Joubert, Mike Roberts, Anh Truong, Floraine Berthouzoz, Pat Hanrahan</div>
-<div class="line">ACM Transactions on Graphics 35(4) (SIGGRAPH 2016)</div>
+<div class="line"><em>ACM Transactions on Graphics 35(4) (SIGGRAPH 2016)</em></div>
 </div>
 <ul class="simple">
 <li><a class="reference external" href="http://nbviewer.jupyter.org/github/mikeroberts3000/flashlight/blob/master/code/experiments/00_siggraph_asia_2015/jupyter/00%20-%20Evaluating%20different%20interpolation%20methods.ipynb">Evaluating different interpolation methods</a></li>
@@ -178,7 +178,7 @@ The core functionality in Flashlight depends on the following Python libraries:<
 <div class="section" id="citing-flashlight">
 <h1>Citing Flashlight<a class="headerlink" href="#citing-flashlight" title="Permalink to this headline">¶</a></h1>
 <p>If you use Flashlight for published work, we encourage you to cite it as follows:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nd">@misc</span><span class="p">{</span><span class="n">flashlight</span><span class="p">,</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nd">@misc</span><span class="p">{</span><span class="n">flashlight</span><span class="p">:</span><span class="mi">2016</span><span class="p">,</span>
     <span class="n">author</span> <span class="o">=</span> <span class="p">{</span><span class="n">Mike</span> <span class="n">Roberts</span><span class="p">},</span>
     <span class="n">title</span>  <span class="o">=</span> <span class="p">{</span><span class="n">Flashlight</span><span class="p">:</span> <span class="n">A</span> <span class="n">Python</span> <span class="n">Library</span> <span class="k">for</span> <span class="n">Analyzing</span> <span class="ow">and</span> <span class="n">Solving</span> <span class="n">Quadrotor</span> <span class="n">Control</span> <span class="n">Problems</span><span class="p">},</span>
     <span class="n">year</span>   <span class="o">=</span> <span class="p">{</span><span class="mi">2016</span><span class="p">},</span>
