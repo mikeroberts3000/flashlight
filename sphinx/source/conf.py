@@ -48,7 +48,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'flashlight'
+project = u'Flashlight'
 copyright = u'2016, Mike Roberts'
 author = u'Mike Roberts'
 
@@ -227,7 +227,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'flashlight.tex', u'flashlight Documentation',
+    (master_doc, 'flashlight.tex', u'Flashlight Documentation',
      u'Mike Roberts', 'manual'),
 ]
 
@@ -257,7 +257,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'flashlight', u'flashlight Documentation',
+    (master_doc, 'Flashlight', u'Flashlight Documentation',
      [author], 1)
 ]
 
@@ -271,7 +271,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'flashlight', u'flashlight Documentation',
+    (master_doc, 'Flashlight', u'Flashlight Documentation',
      author, 'flashlight', 'One line description of project.',
      'Miscellaneous'),
 ]
