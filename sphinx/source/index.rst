@@ -73,7 +73,8 @@ Installing Flashlight
 
 The steps for installing Flashlight are as follows.
 
-1. Install all of Flashlight's dependencies. The core functionality in Flashlight depends on the following Python libraries:
+1. Install all of Flashlight's dependencies.
+The core functionality in Flashlight depends on the following Python libraries:
 
     * `IPython <https://ipython.org>`_
     * `NumPy <http://www.numpy.org>`_
@@ -82,13 +83,14 @@ The steps for installing Flashlight are as follows.
     * `SciPy <http://scipy.org>`_
     * `SymPy <http://www.sympy.org>`_
 
-  Additionally, some of the debug rendering functionality in Flashlight depends on the following libraries:
+  Many of the example notebooks, and some of the debug rendering functionality in Flashlight, depend on the following libraries:
 
     * `Mayavi <http://code.enthought.com/projects/mayavi>`_
-    * `OpenCV <http://opencv.org>`_ (the ``cv2`` Python module)
-    * `VTK <http://www.vtk.org>`_ (the ``vtk`` Python module)
+    * `OpenCV <http://opencv.org>`_ (specifically the ``cv2`` Python module)
+    * `The Python Control Systems Library <https://pypi.python.org/pypi/control/0.7.0>`_
+    * `VTK <http://www.vtk.org>`_ (specifically the ``vtk`` Python module)
 
-  Each of these libraries comes pre-installed with `Enthought Canopy <https://www.enthought.com/products/canopy>`_, or can be installed very easily using the using the Enthought Canopy package manager.
+  Each of these dependencies comes pre-installed with `Enthought Canopy <https://www.enthought.com/products/canopy>`_, or can be installed very easily using the using the Enthought Canopy package manager, or `pip <https://pypi.python.org/pypi/pip>`_.
 
 2. Download the Flashlight source code from our `GitHub repository <http://github.com/mikeroberts3000/flashlight>`_.
 
@@ -148,7 +150,7 @@ If you use Flashlight for published work, we encourage you to cite it as follows
         url    = {http://mikeroberts3000.github.io/flashlight}
     }
 
-Additionally, if you use any of the functions in ``quadrotor_3d``, ``quadrotor_camera_3d``, or ``spline_utils``, we encourage you to cite the following paper::
+Additionally, if you use any of the functions in ``quadrotor_3d``, ``quadrotor_camera_3d``, or ``spline_utils`` for published work, we encourage you to cite the following paper::
 
     @article{joubert:2015,
         author  = {Niels Joubert AND Mike Roberts AND Anh Truong AND Floraine Berthouzoz AND Pat Hanrahan},

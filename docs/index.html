@@ -100,9 +100,10 @@ In this code snippet, we generate the control forces required for a 2D quadrotor
 <div class="section" id="installing-flashlight">
 <h1>Installing Flashlight<a class="headerlink" href="#installing-flashlight" title="Permalink to this headline">¶</a></h1>
 <p>The steps for installing Flashlight are as follows.</p>
-<ol class="arabic">
-<li><p class="first">Install all of Flashlight&#8217;s dependencies. The core functionality in Flashlight depends on the following Python libraries:</p>
+<p>1. Install all of Flashlight&#8217;s dependencies.
+The core functionality in Flashlight depends on the following Python libraries:</p>
 <blockquote>
+<div><blockquote>
 <div><ul class="simple">
 <li><a class="reference external" href="https://ipython.org">IPython</a></li>
 <li><a class="reference external" href="http://www.numpy.org">NumPy</a></li>
@@ -112,18 +113,16 @@ In this code snippet, we generate the control forces required for a 2D quadrotor
 <li><a class="reference external" href="http://www.sympy.org">SymPy</a></li>
 </ul>
 </div></blockquote>
-</li>
-</ol>
-<blockquote>
-<div><p>Additionally, some of the debug rendering functionality in Flashlight depends on the following libraries:</p>
+<p>Many of the example notebooks, and some of the debug rendering functionality in Flashlight, depend on the following libraries:</p>
 <blockquote>
 <div><ul class="simple">
 <li><a class="reference external" href="http://code.enthought.com/projects/mayavi">Mayavi</a></li>
-<li><a class="reference external" href="http://opencv.org">OpenCV</a> (the <code class="docutils literal"><span class="pre">cv2</span></code> Python module)</li>
-<li><a class="reference external" href="http://www.vtk.org">VTK</a> (the <code class="docutils literal"><span class="pre">vtk</span></code> Python module)</li>
+<li><a class="reference external" href="http://opencv.org">OpenCV</a> (specifically the <code class="docutils literal"><span class="pre">cv2</span></code> Python module)</li>
+<li><a class="reference external" href="https://pypi.python.org/pypi/control/0.7.0">The Python Control Systems Library</a></li>
+<li><a class="reference external" href="http://www.vtk.org">VTK</a> (specifically the <code class="docutils literal"><span class="pre">vtk</span></code> Python module)</li>
 </ul>
 </div></blockquote>
-<p>Each of these libraries comes pre-installed with <a class="reference external" href="https://www.enthought.com/products/canopy">Enthought Canopy</a>, or can be installed very easily using the using the Enthought Canopy package manager.</p>
+<p>Each of these dependencies comes pre-installed with <a class="reference external" href="https://www.enthought.com/products/canopy">Enthought Canopy</a>, or can be installed very easily using the using the Enthought Canopy package manager, or <a class="reference external" href="https://pypi.python.org/pypi/pip">pip</a>.</p>
 </div></blockquote>
 <ol class="arabic" start="2">
 <li><p class="first">Download the Flashlight source code from our <a class="reference external" href="http://github.com/mikeroberts3000/flashlight">GitHub repository</a>.</p>
@@ -187,7 +186,7 @@ In this code snippet, we generate the control forces required for a 2D quadrotor
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Additionally, if you use any of the functions in <code class="docutils literal"><span class="pre">quadrotor_3d</span></code>, <code class="docutils literal"><span class="pre">quadrotor_camera_3d</span></code>, or <code class="docutils literal"><span class="pre">spline_utils</span></code>, we encourage you to cite the following paper:</p>
+<p>Additionally, if you use any of the functions in <code class="docutils literal"><span class="pre">quadrotor_3d</span></code>, <code class="docutils literal"><span class="pre">quadrotor_camera_3d</span></code>, or <code class="docutils literal"><span class="pre">spline_utils</span></code> for published work, we encourage you to cite the following paper:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="nd">@article</span><span class="p">{</span><span class="n">joubert</span><span class="p">:</span><span class="mi">2015</span><span class="p">,</span>
     <span class="n">author</span>  <span class="o">=</span> <span class="p">{</span><span class="n">Niels</span> <span class="n">Joubert</span> <span class="n">AND</span> <span class="n">Mike</span> <span class="n">Roberts</span> <span class="n">AND</span> <span class="n">Anh</span> <span class="n">Truong</span> <span class="n">AND</span> <span class="n">Floraine</span> <span class="n">Berthouzoz</span> <span class="n">AND</span> <span class="n">Pat</span> <span class="n">Hanrahan</span><span class="p">},</span>
     <span class="n">title</span>   <span class="o">=</span> <span class="p">{</span><span class="n">An</span> <span class="n">Interactive</span> <span class="n">Tool</span> <span class="k">for</span> <span class="n">Designing</span> <span class="n">Quadrotor</span> <span class="n">Camera</span> <span class="n">Shots</span><span class="p">},</span>
