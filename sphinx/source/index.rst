@@ -82,7 +82,7 @@ The core functionality in Flashlight depends on the following Python libraries:
     * `SciPy <http://scipy.org>`_
     * `SymPy <http://www.sympy.org>`_
 
-  Many of the example notebooks, and some of the debug rendering functionality in Flashlight, depend on the following libraries:
+  Many of the example notebooks, and some of the debug rendering functions in Flashlight, depend on the following Python libraries:
 
     * `Mayavi <http://code.enthought.com/projects/mayavi>`_
     * `OpenCV <http://opencv.org>`_ (specifically the ``cv2`` Python module)
