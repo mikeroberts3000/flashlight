@@ -17,16 +17,16 @@ flashlight includes models for a 2D quadrotor, a 3D quadrotor, and a 3D quadroto
 The following code snippet shows how easy it is to start analyzing quadrotor trajectories using flashlight.
 In this code snippet, we generate the control forces required for 2D quadrotor to follow a simple trajectory::
 
-    from pylab import *; import scipy.integrate;
+    from pylab import *; import scipy.integrate
 
     import flashlight.interpolate_utils as interpolate_utils
     import flashlight.quadrotor_2d      as quadrotor_2d
 
     # Define a simple position trajectory in 2D.
-    num_samples = 200;
-    t_begin     = 0;
-    t_end       = 4*pi;
-    dt          = (t_end - t_begin) / (num_samples - 1);
+    num_samples = 200
+    t_begin     = 0
+    t_end       = 4*pi
+    dt          = (t_end - t_begin) / (num_samples - 1)
 
     t = linspace(t_begin, t_end, num_samples)
     p = c_[ sin(t) + 0.5*t, t ]
