@@ -48,4 +48,4 @@ x_sim              = scipy.integrate.odeint(compute_x_dot, x_0, t)
 quadrotor_2d.draw(t, x_sim, t_nominal=t, x_nominal=x_nominal, inline=True)
 ```
 
-Installation instructions, detailed code examples, and other documentation can be found at mikeroberts3000.github.io/flashlight.
+Installation instructions, detailed code examples, and other documentation can be found at [mikeroberts3000.github.io/flashlight](http://mikeroberts3000.github.io/flashlight).
