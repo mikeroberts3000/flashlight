@@ -124,7 +124,7 @@ html_theme_options = {
     'github_user':'mikeroberts3000',
     'github_repo':'flashlight',
     'github_banner':'true',
-    # 'github_type':'star',
+    'github_type':'star',
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
