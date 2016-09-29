@@ -1010,7 +1010,7 @@ def draw(t, x, t_nominal=None, x_nominal=None, p_look_at_nominal=None, tmp_dir="
         plot3d_cam_axis_y.mlab_source.set( x=[p_world_cam_center[2],p_world_cam_axis_end_y[2]], y=[p_world_cam_center[1],p_world_cam_axis_end_y[1]], z=[p_world_cam_center[0],p_world_cam_axis_end_y[0]] )
         plot3d_cam_axis_x.mlab_source.set( x=[p_world_cam_center[2],p_world_cam_axis_end_x[2]], y=[p_world_cam_center[1],p_world_cam_axis_end_x[1]], z=[p_world_cam_center[0],p_world_cam_axis_end_x[0]] )
 
-    @mayavi.mlab.animate
+    @mayavi.mlab.animate(delay=10)
     def mlab_animate():
 
         ti = 0

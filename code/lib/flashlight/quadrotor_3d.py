@@ -822,7 +822,7 @@ def draw(t, x, t_nominal=None, x_nominal=None, tmp_dir="tmp", request_delete_tmp
         plot3d_quad_axis_y.mlab_source.set( x=[p_world_center[2],p_world_axis_end_y[2]], y=[p_world_center[1],p_world_axis_end_y[1]], z=[p_world_center[0],p_world_axis_end_y[0]] )
         plot3d_quad_axis_x.mlab_source.set( x=[p_world_center[2],p_world_axis_end_x[2]], y=[p_world_center[1],p_world_axis_end_x[1]], z=[p_world_center[0],p_world_axis_end_x[0]] )
 
-    @mayavi.mlab.animate
+    @mayavi.mlab.animate(delay=10)
     def mlab_animate():
 
         ti = 0
