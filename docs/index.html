@@ -100,11 +100,10 @@ In this code snippet, we generate the control forces required for a 2D quadrotor
 <div class="section" id="installing-flashlight">
 <h1>Installing Flashlight<a class="headerlink" href="#installing-flashlight" title="Permalink to this headline">¶</a></h1>
 <p>The steps for installing Flashlight are as follows.</p>
-<p>1. Install all of Flashlight&#8217;s dependencies.
-The core functionality in Flashlight depends on the following Python libraries:</p>
-<blockquote>
-<div><blockquote>
-<div><ul class="simple">
+<ol class="arabic">
+<li><dl class="first docutils">
+<dt>Install all of Flashlight&#8217;s dependencies. The core functionality in Flashlight depends on the following Python libraries:</dt>
+<dd><ul class="first last simple">
 <li><a class="reference external" href="https://ipython.org">IPython</a></li>
 <li><a class="reference external" href="http://www.numpy.org">NumPy</a></li>
 <li><a class="reference external" href="http://matplotlib.org">Matplotlib</a></li>
@@ -112,16 +111,21 @@ The core functionality in Flashlight depends on the following Python libraries:<
 <li><a class="reference external" href="http://scipy.org">SciPy</a></li>
 <li><a class="reference external" href="http://www.sympy.org">SymPy</a></li>
 </ul>
-</div></blockquote>
-<p>Many of the example notebooks, and some of the debug rendering functions in Flashlight, depend on the following Python libraries:</p>
+</dd>
+</dl>
+</li>
+</ol>
 <blockquote>
-<div><ul class="simple">
+<div><dl class="docutils">
+<dt>Many of the example notebooks, and some of the debug rendering functions in Flashlight, depend on the following Python libraries:</dt>
+<dd><ul class="first last simple">
 <li><a class="reference external" href="http://code.enthought.com/projects/mayavi">Mayavi</a></li>
 <li><a class="reference external" href="http://opencv.org">OpenCV</a> (specifically the <code class="docutils literal"><span class="pre">cv2</span></code> Python module)</li>
 <li><a class="reference external" href="https://pypi.python.org/pypi/control/0.7.0">The Python Control Systems Library</a></li>
 <li><a class="reference external" href="http://www.vtk.org">VTK</a> (specifically the <code class="docutils literal"><span class="pre">vtk</span></code> Python module)</li>
 </ul>
-</div></blockquote>
+</dd>
+</dl>
 <p>Each of these dependencies comes pre-installed with <a class="reference external" href="https://www.enthought.com/products/canopy">Enthought Canopy</a>, or can be installed very easily using the using the Enthought Canopy package manager, or <a class="reference external" href="https://pypi.python.org/pypi/pip">pip</a>.</p>
 </div></blockquote>
 <ol class="arabic" start="2">
@@ -131,15 +135,11 @@ The core functionality in Flashlight depends on the following Python libraries:<
 </li>
 <li><p class="first">Include the following code snippet in your Python code before importing Flashlight:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">path_utils</span>
-<span class="n">path_utils</span><span class="o">.</span><span class="n">add_relative_to_current_source_file_path_to_sys_path</span><span class="p">(</span><span class="s2">&quot;path/to/flashlight/code/lib&quot;</span><span class="p">)</span>
+<span class="n">path_utils</span><span class="o">.</span><span class="n">add_relative_to_current_source_file_path_to_sys_path</span><span class="p">(</span><span class="s2">&quot;relative_or_absolute_path/to/flashlight/code/lib&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Verify that you can import Flashlight:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">flashlight</span>
-<span class="nb">print</span> <span class="n">flashlight</span><span class="o">.</span><span class="n">__version__</span>
-</pre></div>
-</div>
+<li><p class="first">Verify that you can <code class="docutils literal"><span class="pre">import</span> <span class="pre">flashlight</span></code> from your Python code. This import statement should print <code class="docutils literal"><span class="pre">Initializing</span> <span class="pre">flashlight</span> <span class="pre">v0.0.1</span></code> to the console.</p>
 </li>
 </ol>
 <p>After completing these steps, you&#8217;re ready to start using Flashlight.</p>
@@ -186,7 +186,7 @@ The core functionality in Flashlight depends on the following Python libraries:<
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Additionally, if you use any of the functions in <code class="docutils literal"><span class="pre">curve_utils</span></code>, <code class="docutils literal"><span class="pre">quadrotor_3d</span></code>, <code class="docutils literal"><span class="pre">quadrotor_camera_3d</span></code>, or <code class="docutils literal"><span class="pre">spline_utils</span></code> for published work, we encourage you to cite the following paper:</p>
+<p>Additionally, if you use any of the functionality in <code class="docutils literal"><span class="pre">curve_utils</span></code>, <code class="docutils literal"><span class="pre">quadrotor_3d</span></code>, <code class="docutils literal"><span class="pre">quadrotor_camera_3d</span></code>, or <code class="docutils literal"><span class="pre">spline_utils</span></code> for published work, we encourage you to cite the following paper:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="nd">@article</span><span class="p">{</span><span class="n">joubert</span><span class="p">:</span><span class="mi">2015</span><span class="p">,</span>
     <span class="n">author</span>  <span class="o">=</span> <span class="p">{</span><span class="n">Niels</span> <span class="n">Joubert</span> <span class="n">AND</span> <span class="n">Mike</span> <span class="n">Roberts</span> <span class="n">AND</span> <span class="n">Anh</span> <span class="n">Truong</span> <span class="n">AND</span> <span class="n">Floraine</span> <span class="n">Berthouzoz</span> <span class="n">AND</span> <span class="n">Pat</span> <span class="n">Hanrahan</span><span class="p">},</span>
     <span class="n">title</span>   <span class="o">=</span> <span class="p">{</span><span class="n">An</span> <span class="n">Interactive</span> <span class="n">Tool</span> <span class="k">for</span> <span class="n">Designing</span> <span class="n">Quadrotor</span> <span class="n">Camera</span> <span class="n">Shots</span><span class="p">},</span>
