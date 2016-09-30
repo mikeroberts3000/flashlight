@@ -2,6 +2,28 @@
 
 Flashlight is a lightweight Python library for analyzing and solving quadrotor control problems. Flashlight enables you to easily solve for minimum snap trajectories that go through a sequence of waypoints, compute the required control forces along trajectories, execute the trajectories in a physics simulator, and visualize the simulation results. Flashlight also makes it easy to simulate external disturbances, and to recover from those disturbances using time-varying LQR feedback control. Flashlight includes physical models for 2D quadrotors, 3D quadrotors, and 3D quadrotor cameras.
 
+<table border='0px'>
+    <tr>
+
+        <td text-align='center'> 
+            <img height='150px' src='https://github.com/mikeroberts3000/flashlight/raw/master/docs/_static/flashlight//flashlight_1.jpg' alt='' title=''/>
+        </td>
+
+        <td text-align='center'> 
+            <img height='135px' src='https://github.com/mikeroberts3000/flashlight/raw/master/docs/_static/flashlight//flashlight_2.jpg' alt='' title=''/>
+        </td>
+
+        <td text-align='center'>
+            <img height='100px' src='https://github.com/mikeroberts3000/flashlight/raw/master/docs/_static/flashlight//flashlight_3.jpg' alt='' title=''/>
+        </td>
+
+        <td text-align='center'> 
+            <img height='110px' src='https://github.com/mikeroberts3000/flashlight/raw/master/docs/_static/flashlight//flashlight_4.jpg' alt='' title=''/>
+        </td>
+
+    </tr>
+</table>
+
 The following code snippet shows how easy it is to start analyzing quadrotor trajectories using Flashlight. In this code snippet, we generate the control forces required for a 2D quadrotor to follow a simple trajectory, and simulate the results:
 
 ```python
