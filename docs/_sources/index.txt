@@ -21,19 +21,19 @@ Flashlight includes physical models for 2D quadrotors, 3D quadrotors, and 3D qua
         <tr>
 
             <td text-align='center'> 
-                <a href='http://mikeroberts3000.github.io/flashlight'><img height='150px' src='_static/flashlight/flashlight_1.jpg' alt='' title=''/></a>
+                <a href='http://mikeroberts3000.github.io/flashlight'><img height='130px' src='_static/flashlight/flashlight_1.jpg' alt='' title=''/></a>
             </td>
 
             <td text-align='center'> 
-                <a href='http://mikeroberts3000.github.io/flashlight'><img height='135px' src='_static/flashlight/flashlight_2.jpg' alt='' title=''/></a>
+                <a href='http://mikeroberts3000.github.io/flashlight'><img height='115px' src='_static/flashlight/flashlight_2.jpg' alt='' title=''/></a>
             </td>
 
             <td text-align='center'>
-                <a href='http://mikeroberts3000.github.io/flashlight'><img height='100px' src='_static/flashlight/flashlight_3.jpg' alt='' title=''/></a>
+                <a href='http://mikeroberts3000.github.io/flashlight'><img height='80px' src='_static/flashlight/flashlight_3.jpg' alt='' title=''/></a>
             </td>
 
             <td text-align='center'> 
-                <a href='http://mikeroberts3000.github.io/flashlight'><img height='110px' src='_static/flashlight/flashlight_4.jpg' alt='' title=''/></a>
+                <a href='http://mikeroberts3000.github.io/flashlight'><img height='90px' src='_static/flashlight/flashlight_4.jpg' alt='' title=''/></a>
             </td>
 
         </tr>
