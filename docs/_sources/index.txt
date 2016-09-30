@@ -9,7 +9,6 @@
 Welcome to Flashlight
 =====================
 
-
 Flashlight is a lightweight Python library for analyzing and solving quadrotor control problems.
 Flashlight enables you to easily solve for minimum snap trajectories that go through a sequence of waypoints, compute the required control forces along trajectories, execute the trajectories in a physics simulator, and visualize the simulation results.
 Flashlight also makes it easy to simulate external disturbances, and to recover from those disturbances using time-varying LQR feedback control.
