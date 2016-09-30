@@ -9,10 +9,35 @@
 Welcome to Flashlight
 =====================
 
+
 Flashlight is a lightweight Python library for analyzing and solving quadrotor control problems.
 Flashlight enables you to easily solve for minimum snap trajectories that go through a sequence of waypoints, compute the required control forces along trajectories, execute the trajectories in a physics simulator, and visualize the simulation results.
 Flashlight also makes it easy to simulate external disturbances, and to recover from those disturbances using time-varying LQR feedback control.
 Flashlight includes physical models for 2D quadrotors, 3D quadrotors, and 3D quadrotor cameras.
+
+.. raw:: html
+
+    <table>
+        <tr>
+
+            <td text-align='center'> 
+                <a href='http://mikeroberts3000.github.io/flashlight'><img height='150px' src='_static/flashlight/flashlight_1.jpg' alt='' title=''/></a>
+            </td>
+
+            <td text-align='center'> 
+                <a href='http://mikeroberts3000.github.io/flashlight'><img height='135px' src='_static/flashlight/flashlight_2.jpg' alt='' title=''/></a>
+            </td>
+
+            <td text-align='center'>
+                <a href='http://mikeroberts3000.github.io/flashlight'><img height='100px' src='_static/flashlight/flashlight_3.jpg' alt='' title=''/></a>
+            </td>
+
+            <td text-align='center'> 
+                <a href='http://mikeroberts3000.github.io/flashlight'><img height='110px' src='_static/flashlight/flashlight_4.jpg' alt='' title=''/></a>
+            </td>
+
+        </tr>
+    </table>
 
 The following code snippet shows how easy it is to start analyzing quadrotor trajectories using Flashlight.
 In this code snippet, we generate the control forces required for a 2D quadrotor to follow a simple trajectory, and simulate the results::
@@ -79,11 +104,13 @@ The steps for installing Flashlight are as follows.
     * `scikit-learn <http://scikit-learn.org>`_
     * `SciPy <http://scipy.org>`_
     * `SymPy <http://www.sympy.org>`_
+
   Many of the example notebooks, and some of the debug rendering functions in Flashlight, depend on the following Python libraries:
     * `Mayavi <http://code.enthought.com/projects/mayavi>`_
     * `OpenCV <http://opencv.org>`_ (specifically the ``cv2`` Python module)
     * `The Python Control Systems Library <https://pypi.python.org/pypi/control/0.7.0>`_
     * `VTK <http://www.vtk.org>`_ (specifically the ``vtk`` Python module)
+
   Each of these dependencies comes pre-installed with `Enthought Canopy <https://www.enthought.com/products/canopy>`_, or can be installed very easily using the using the Enthought Canopy package manager, or `pip <https://pypi.python.org/pypi/pip>`_.
 
 2. Download the Flashlight source code from our `GitHub repository <http://github.com/mikeroberts3000/flashlight>`_.
@@ -125,10 +152,31 @@ As part of the Flashlight source code, we include notebooks that reproduce the e
 
 | `An Interactive Tool for Designing Quadrotor Camera Shots <http://stanford-gfx.github.io/Horus>`_
 | Niels Joubert, Mike Roberts, Anh Truong, Floraine Berthouzoz, Pat Hanrahan
-| *ACM Transactions on Graphics 35(4) (SIGGRAPH 2016)*
+| *ACM Transactions on Graphics 34(6) (SIGGRAPH Asia 2015)*
 
 * `Evaluating different interpolation methods <http://nbviewer.jupyter.org/github/mikeroberts3000/flashlight/blob/master/code/experiments/00_siggraph_asia_2015/jupyter/00%20-%20Evaluating%20different%20interpolation%20methods.ipynb>`_
 * `Evaluating different spline degrees and derivatives <http://nbviewer.jupyter.org/github/mikeroberts3000/flashlight/blob/master/code/experiments/00_siggraph_asia_2015/jupyter/01%20-%20Evaluating%20different%20spline%20degrees%20and%20derivatives.ipynb>`_
+
+Projects using Flashlight
+=========================
+
+Flashlight is being used in the following projects:
+
+.. raw:: html
+
+    <iframe width="640" height="360" src="https://www.youtube.com/embed/zhik1D2o6Fc" frameborder="0" allowfullscreen></iframe>
+
+| `Generating Dynamically Feasible Trajectories for Quadrotor Cameras <http://http://graphics.stanford.edu/papers/feasible_trajectories>`_
+| Mike Roberts, Pat Hanrahan
+| *ACM Transactions on Graphics 35(4) (SIGGRAPH 2016)*
+
+.. raw:: html
+
+    <iframe width="640" height="360" src="https://www.youtube.com/embed/Ds-KF4ZSnAo" frameborder="0" allowfullscreen></iframe>
+
+| `An Interactive Tool for Designing Quadrotor Camera Shots <http://stanford-gfx.github.io/Horus>`_
+| Niels Joubert, Mike Roberts, Anh Truong, Floraine Berthouzoz, Pat Hanrahan
+| *ACM Transactions on Graphics 34(6) (SIGGRAPH Asia 2015)*
 
 Citing Flashlight
 =================
@@ -136,10 +184,10 @@ Citing Flashlight
 If you use Flashlight for published work, we encourage you to cite it as follows::
 
     @misc{flashlight:2016,
-        author = {Mike Roberts},
-        title  = {Flashlight: A Python Library for Analyzing and Solving Quadrotor Control Problems},
-        year   = {2016},
-        url    = {http://mikeroberts3000.github.io/flashlight}
+        author       = {Mike Roberts},
+        title        = {Flashlight: A Python Library for Analyzing and Solving Quadrotor Control Problems},
+        year         = {2016},
+        howpublished = {\url{http://mikeroberts3000.github.io/flashlight}}
     }
 
 Additionally, if you use any of the functionality in ``curve_utils``, ``quadrotor_3d``, ``quadrotor_camera_3d``, or ``spline_utils`` for published work, we encourage you to cite the following paper::

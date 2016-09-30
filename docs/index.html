@@ -49,7 +49,27 @@
 Flashlight enables you to easily solve for minimum snap trajectories that go through a sequence of waypoints, compute the required control forces along trajectories, execute the trajectories in a physics simulator, and visualize the simulation results.
 Flashlight also makes it easy to simulate external disturbances, and to recover from those disturbances using time-varying LQR feedback control.
 Flashlight includes physical models for 2D quadrotors, 3D quadrotors, and 3D quadrotor cameras.</p>
-<p>The following code snippet shows how easy it is to start analyzing quadrotor trajectories using Flashlight.
+<table>
+    <tr>
+
+        <td text-align='center'>
+            <a href='http://mikeroberts3000.github.io/flashlight'><img height='150px' src='_static/flashlight/flashlight_1.jpg' alt='' title=''/></a>
+        </td>
+
+        <td text-align='center'>
+            <a href='http://mikeroberts3000.github.io/flashlight'><img height='135px' src='_static/flashlight/flashlight_2.jpg' alt='' title=''/></a>
+        </td>
+
+        <td text-align='center'>
+            <a href='http://mikeroberts3000.github.io/flashlight'><img height='100px' src='_static/flashlight/flashlight_3.jpg' alt='' title=''/></a>
+        </td>
+
+        <td text-align='center'>
+            <a href='http://mikeroberts3000.github.io/flashlight'><img height='110px' src='_static/flashlight/flashlight_4.jpg' alt='' title=''/></a>
+        </td>
+
+    </tr>
+</table><p>The following code snippet shows how easy it is to start analyzing quadrotor trajectories using Flashlight.
 In this code snippet, we generate the control forces required for a 2D quadrotor to follow a simple trajectory, and simulate the results:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pylab</span> <span class="k">import</span> <span class="o">*</span><span class="p">;</span> <span class="kn">import</span> <span class="nn">scipy.integrate</span>
 
@@ -168,21 +188,35 @@ In this code snippet, we generate the control forces required for a 2D quadrotor
 <div class="line-block">
 <div class="line"><a class="reference external" href="http://stanford-gfx.github.io/Horus">An Interactive Tool for Designing Quadrotor Camera Shots</a></div>
 <div class="line">Niels Joubert, Mike Roberts, Anh Truong, Floraine Berthouzoz, Pat Hanrahan</div>
-<div class="line"><em>ACM Transactions on Graphics 35(4) (SIGGRAPH 2016)</em></div>
+<div class="line"><em>ACM Transactions on Graphics 34(6) (SIGGRAPH Asia 2015)</em></div>
 </div>
 <ul class="simple">
 <li><a class="reference external" href="http://nbviewer.jupyter.org/github/mikeroberts3000/flashlight/blob/master/code/experiments/00_siggraph_asia_2015/jupyter/00%20-%20Evaluating%20different%20interpolation%20methods.ipynb">Evaluating different interpolation methods</a></li>
 <li><a class="reference external" href="http://nbviewer.jupyter.org/github/mikeroberts3000/flashlight/blob/master/code/experiments/00_siggraph_asia_2015/jupyter/01%20-%20Evaluating%20different%20spline%20degrees%20and%20derivatives.ipynb">Evaluating different spline degrees and derivatives</a></li>
 </ul>
 </div>
+<div class="section" id="projects-using-flashlight">
+<h1>Projects using Flashlight<a class="headerlink" href="#projects-using-flashlight" title="Permalink to this headline">¶</a></h1>
+<p>Flashlight is being used in the following projects:</p>
+<iframe width="640" height="360" src="https://www.youtube.com/embed/zhik1D2o6Fc" frameborder="0" allowfullscreen></iframe><div class="line-block">
+<div class="line"><a class="reference external" href="http://http://graphics.stanford.edu/papers/feasible_trajectories">Generating Dynamically Feasible Trajectories for Quadrotor Cameras</a></div>
+<div class="line">Mike Roberts, Pat Hanrahan</div>
+<div class="line"><em>ACM Transactions on Graphics 35(4) (SIGGRAPH 2016)</em></div>
+</div>
+<iframe width="640" height="360" src="https://www.youtube.com/embed/Ds-KF4ZSnAo" frameborder="0" allowfullscreen></iframe><div class="line-block">
+<div class="line"><a class="reference external" href="http://stanford-gfx.github.io/Horus">An Interactive Tool for Designing Quadrotor Camera Shots</a></div>
+<div class="line">Niels Joubert, Mike Roberts, Anh Truong, Floraine Berthouzoz, Pat Hanrahan</div>
+<div class="line"><em>ACM Transactions on Graphics 34(6) (SIGGRAPH Asia 2015)</em></div>
+</div>
+</div>
 <div class="section" id="citing-flashlight">
 <h1>Citing Flashlight<a class="headerlink" href="#citing-flashlight" title="Permalink to this headline">¶</a></h1>
 <p>If you use Flashlight for published work, we encourage you to cite it as follows:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="nd">@misc</span><span class="p">{</span><span class="n">flashlight</span><span class="p">:</span><span class="mi">2016</span><span class="p">,</span>
-    <span class="n">author</span> <span class="o">=</span> <span class="p">{</span><span class="n">Mike</span> <span class="n">Roberts</span><span class="p">},</span>
-    <span class="n">title</span>  <span class="o">=</span> <span class="p">{</span><span class="n">Flashlight</span><span class="p">:</span> <span class="n">A</span> <span class="n">Python</span> <span class="n">Library</span> <span class="k">for</span> <span class="n">Analyzing</span> <span class="ow">and</span> <span class="n">Solving</span> <span class="n">Quadrotor</span> <span class="n">Control</span> <span class="n">Problems</span><span class="p">},</span>
-    <span class="n">year</span>   <span class="o">=</span> <span class="p">{</span><span class="mi">2016</span><span class="p">},</span>
-    <span class="n">url</span>    <span class="o">=</span> <span class="p">{</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">mikeroberts3000</span><span class="o">.</span><span class="n">github</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">flashlight</span><span class="p">}</span>
+    <span class="n">author</span>       <span class="o">=</span> <span class="p">{</span><span class="n">Mike</span> <span class="n">Roberts</span><span class="p">},</span>
+    <span class="n">title</span>        <span class="o">=</span> <span class="p">{</span><span class="n">Flashlight</span><span class="p">:</span> <span class="n">A</span> <span class="n">Python</span> <span class="n">Library</span> <span class="k">for</span> <span class="n">Analyzing</span> <span class="ow">and</span> <span class="n">Solving</span> <span class="n">Quadrotor</span> <span class="n">Control</span> <span class="n">Problems</span><span class="p">},</span>
+    <span class="n">year</span>         <span class="o">=</span> <span class="p">{</span><span class="mi">2016</span><span class="p">},</span>
+    <span class="n">howpublished</span> <span class="o">=</span> <span class="p">{</span>\<span class="n">url</span><span class="p">{</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">mikeroberts3000</span><span class="o">.</span><span class="n">github</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">flashlight</span><span class="p">}}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -237,6 +271,7 @@ In this code snippet, we generate the control forces required for a 2D quadrotor
 <li><a class="reference internal" href="#installing-flashlight">Installing Flashlight</a></li>
 <li><a class="reference internal" href="#examples">Examples</a></li>
 <li><a class="reference internal" href="#reproducible-research">Reproducible Research</a></li>
+<li><a class="reference internal" href="#projects-using-flashlight">Projects using Flashlight</a></li>
 <li><a class="reference internal" href="#citing-flashlight">Citing Flashlight</a></li>
 </ul>
 
