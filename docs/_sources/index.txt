@@ -99,7 +99,7 @@ The steps for installing Flashlight are as follows.
 1. Install all of Flashlight's dependencies. The core functionality in Flashlight depends on the following Python libraries:
     * `IPython <https://ipython.org>`_
     * `NumPy <http://www.numpy.org>`_
-    * `Matplotlib <http://matplotlib.org>`_
+    * `matplotlib <http://matplotlib.org>`_
     * `scikit-learn <http://scikit-learn.org>`_
     * `SciPy <http://scipy.org>`_
     * `SymPy <http://www.sympy.org>`_
