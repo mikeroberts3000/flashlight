@@ -16,7 +16,6 @@ import trig_utils
 
 
 
-
 front_prop_and_quad_positive_x_axis_angle = pi/4
 rear_prop_and_quad_negative_x_axis_angle  = pi/4
 y_axis_torque_per_newton_per_prop         = 1
