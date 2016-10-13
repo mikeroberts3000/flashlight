@@ -28,7 +28,7 @@ num_x_dims  = 2*num_q_dims
 num_u_dims  = 2
 num_dt_dims = 1
 
-num_dims_g_dynamics_ti = num_x_dims
+# num_dims_g_dynamics_ti = num_x_dims
 
 build_sympy_modules_on_import = False
 # build_sympy_modules_on_import = False
@@ -77,7 +77,7 @@ print "flashlight.quadrotor_2d: Finished constructing sympy symbols (%.03f secon
 
 
 
-def construct_manipulator_matrix_expressions(x_expr,t_expr):
+def construct_manipulator_matrix_expressions():
 
     print "flashlight.quadrotor_2d: Constructing manipulator matrix expressions..."
 
@@ -508,8 +508,6 @@ def draw(t, x, t_nominal=None, x_nominal=None, inline=False):
 
     if inline:
         rc("animation", html="html5")
-    else:
-        plt.switch_backend("Qt4Agg")
 
     fig = figure()
     ax  = fig.add_subplot(111, autoscale_on=False, xlim=(p_x_min-p_x_pad, p_x_max+p_x_pad), ylim=(p_y_min-p_y_pad, p_y_max+p_y_pad))

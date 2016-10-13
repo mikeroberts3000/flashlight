@@ -108,9 +108,10 @@ The steps for installing Flashlight are as follows.
     * `Mayavi <http://code.enthought.com/projects/mayavi>`_
     * `OpenCV <http://opencv.org>`_ (specifically the ``cv2`` Python module)
     * `The Python Control Systems Library <https://pypi.python.org/pypi/control/0.7.0>`_
+    * `Slycot <https://github.com/avventi/Slycot>`_
     * `VTK <http://www.vtk.org>`_ (specifically the ``vtk`` Python module)
 
-  Each of these dependencies comes pre-installed with `Enthought Canopy <https://www.enthought.com/products/canopy>`_, or can be installed very easily using the using the Enthought Canopy package manager, or `pip <https://pypi.python.org/pypi/pip>`_.
+  Each of these dependencies comes pre-installed with `Enthought Canopy <https://www.enthought.com/products/canopy>`_, or can be installed very easily using the using the Enthought Canopy package manager, or `pip <https://pypi.python.org/pypi/pip>`_. The only dependency that is slightly more involved to install is Slycot, but this is still easy to install, by downloading the source from GitHub and running ``sudo python setup.py install`` from the top-level GitHub folder.
 
 2. Download the Flashlight source code from our `GitHub repository <http://github.com/mikeroberts3000/flashlight>`_.
 

@@ -10,6 +10,11 @@ import sympy.utilities.autowrap
 
 
 
+cc_compiler  = "/usr/local/bin/gcc-4.9"
+cxx_compiler = "/usr/local/bin/g++-4.9"
+
+
+
 #
 # constructing matrices
 #
@@ -655,6 +660,10 @@ from distutils.extension import Extension
 from Cython.Build        import cythonize
 
 import numpy
+import os
+
+os.environ["CC"]   = "%s"
+os.environ["CXX"]  = "%s"
 
 ext_name           = "%s_vectorized"
 src_files          = [ "%s_vectorized.pyx", "%s_autofunc.c" ]
@@ -746,7 +755,7 @@ def build_module_autowrap(expr,syms,module_name,tmp_dir,out_dir,dummify=False,cs
 
     with open("%s/%s_setup.py" % (tmp_dir,module_name), "w") as f:
         setup_py_str_mod = setup_py_str
-        setup_py_str_mod = setup_py_str_mod.replace("from Cython.Distutils import build_ext","from Cython.Distutils import build_ext\nimport numpy")
+        setup_py_str_mod = setup_py_str_mod.replace("from Cython.Distutils import build_ext","from Cython.Distutils import build_ext\n\nimport numpy\nimport os\n\nos.environ['CC']  = '%s'\nos.environ['CXX'] = '%s'\n\n" % (cc_compiler, cxx_compiler))
         setup_py_str_mod = setup_py_str_mod.replace("extra_compile_args=['-std=c99']","extra_compile_args=['-std=c99','-fno-var-tracking','-fno-var-tracking-assignments'], include_dirs=[numpy.get_include()]")
         setup_py_str_mod = setup_py_str_mod.replace("%s" % tmp_module_name,        "%s"          % module_name)
         setup_py_str_mod = setup_py_str_mod.replace("%s" % tmp_autofunc_code_name, "%s_autofunc" % module_name)
@@ -785,7 +794,7 @@ def build_module_autowrap(expr,syms,module_name,tmp_dir,out_dir,dummify=False,cs
             cython_out_v_type_str = "FLOAT64_DTYPE_t [:]"
             cython_args_str       = str( [ "args[i,%d]" % i for i in range(len(syms)) ] )[1:-1].replace("'","")
             cython_loop_body_str  = "out_v[i] = autofunc(%s)" % cython_args_str
-        vectorized_setup_py_str_eval = vectorized_setup_py_str % (module_name, module_name, module_name)
+        vectorized_setup_py_str_eval = vectorized_setup_py_str % (cc_compiler, cxx_compiler, module_name, module_name, module_name)
         vectorized_pyx_str_eval      = vectorized_pyx_str % (module_name, c_return_type_str, c_func_signature_str, cython_out_type_str, cython_out_shape_str, cython_out_v_type_str, cython_loop_body_str)
         with open("%s/%s_vectorized_setup.py" % (tmp_dir,module_name), "w") as f:
             vectorized_setup_py_str_mod = vectorized_setup_py_str_eval

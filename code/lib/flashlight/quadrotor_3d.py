@@ -90,7 +90,7 @@ print "flashlight.quadrotor_3d: Finished constructing sympy symbols (%.03f secon
 
 
 
-def construct_manipulator_matrix_expressions(x_expr,t_expr):
+def construct_manipulator_matrix_expressions():
 
     print "flashlight.quadrotor_3d: Constructing manipulator matrix expressions..."
 
