@@ -166,7 +166,7 @@ Flashlight is being used in the following projects:
 
     <iframe width="640" height="360" src="https://www.youtube.com/embed/zhik1D2o6Fc" frameborder="0" allowfullscreen></iframe>
 
-| `Generating Dynamically Feasible Trajectories for Quadrotor Cameras <http://http://graphics.stanford.edu/papers/feasible_trajectories>`_
+| `Generating Dynamically Feasible Trajectories for Quadrotor Cameras <http://graphics.stanford.edu/papers/feasible_trajectories>`_
 | Mike Roberts, Pat Hanrahan
 | *ACM Transactions on Graphics 35(4) (SIGGRAPH 2016)*
 
